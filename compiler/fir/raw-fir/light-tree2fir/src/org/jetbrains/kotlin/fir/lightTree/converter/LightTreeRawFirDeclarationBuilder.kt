@@ -94,7 +94,14 @@ class LightTreeRawFirDeclarationBuilder(
                 }
                 IMPORT_LIST -> importList += convertImportDirectives(child)
                 CLASS -> firDeclarationList += convertClass(child)
-                FUN -> firDeclarationList += convertFunctionDeclaration(child) as FirDeclaration
+                FUN -> {
+                    if (doesFunctionHaveAL(child, tree)) {
+                        firDeclarationList += convertFunctionDeclaration(child, UsingArgumentLabelFunctionStatus.INTERNAL) as FirDeclaration
+                        firDeclarationList += convertFunctionDeclaration(child, UsingArgumentLabelFunctionStatus.EXTERNAL) as FirDeclaration
+                    } else {
+                        firDeclarationList += convertFunctionDeclaration(child, UsingArgumentLabelFunctionStatus.IGNORED) as FirDeclaration
+                    }
+                }
                 KtNodeTypes.PROPERTY -> firDeclarationList += convertPropertyDeclaration(child)
                 TYPEALIAS -> firDeclarationList += convertTypeAlias(child)
                 OBJECT_DECLARATION -> firDeclarationList += convertClass(child)
@@ -123,6 +130,15 @@ class LightTreeRawFirDeclarationBuilder(
             imports += importList
             declarations += firDeclarationList
         }
+    }
+
+    fun doesFunctionHaveAL(functionNode: LighterASTNode, lightTree: FlyweightCapableTreeStructure<LighterASTNode>): Boolean {
+        return functionNode.getChildren(lightTree).find { it.tokenType == VALUE_PARAMETER_LIST }
+            ?.let { valueParameterListNode ->
+                valueParameterListNode.getChildren(lightTree).filter { it.tokenType == VALUE_PARAMETER }.any { valueParameterNode ->
+                    valueParameterNode.getChildren(lightTree).count { it.tokenType == IDENTIFIER } == 2
+                }
+            } ?: false
     }
 
     /**
@@ -1763,10 +1779,30 @@ class LightTreeRawFirDeclarationBuilder(
         }
     }
 
+    // Here we need to generate a body for a function consisting of a single call to the internal function with all the parameters passed
+    fun generateJumperBody(
+        outerName: Name,
+        valueParameters: MutableList<FirValueParameter>,
+        originFunction: LighterASTNode
+    ): Pair<FirBlock?, FirContractDescription?> {
+        return FirSingleExpressionBlock(
+            expressionConverter.generateCustomCallExpression(outerName, valueParameters, originFunction).toReturn(baseSource = originFunction.toFirSourceElement(kind = KtFakeSourceElementKind.DuplicatedProxyExternalFunction))
+        ) to null
+    }
+
+    enum class UsingArgumentLabelFunctionStatus {
+        IGNORED,    // We just use the first identifier as a classic label and generate the function as usual
+        EXTERNAL,   // We use the first identifiers and generate a jumper body to the internal function
+        INTERNAL    // We use the second identifiers and add '$' to the function name
+    }
+
     /**
      * @see org.jetbrains.kotlin.parsing.KotlinParsing.parseFunction
      */
-    fun convertFunctionDeclaration(functionDeclaration: LighterASTNode): FirStatement {
+    fun convertFunctionDeclaration(
+        functionDeclaration: LighterASTNode,
+        argumentLabelStatus: UsingArgumentLabelFunctionStatus = UsingArgumentLabelFunctionStatus.IGNORED
+    ): FirStatement {
         var modifiers = Modifier()
         val functionAnnotations = mutableListOf<FirAnnotationCall>()
         var identifier: String? = null
@@ -1782,6 +1818,9 @@ class LightTreeRawFirDeclarationBuilder(
         var outerContractDescription: FirContractDescription? = null
         functionDeclaration.getChildNodeByType(IDENTIFIER)?.let {
             identifier = it.asText
+        }
+        if (argumentLabelStatus == UsingArgumentLabelFunctionStatus.INTERNAL) {
+            identifier += '$'
         }
 
         val parentNode = functionDeclaration.getParent()
@@ -1887,14 +1926,16 @@ class LightTreeRawFirDeclarationBuilder(
                         valueParameters += convertValueParameters(
                             list,
                             functionSymbol,
-                            if (isAnonymousFunction) ValueParameterDeclaration.LAMBDA else ValueParameterDeclaration.FUNCTION
+                            if (isAnonymousFunction) ValueParameterDeclaration.LAMBDA else ValueParameterDeclaration.FUNCTION,
+                            useFirstIdentifier = argumentLabelStatus != UsingArgumentLabelFunctionStatus.INTERNAL
                         ).map { it.firValueParameter }
                     }
 
                     val allowLegacyContractDescription = outerContractDescription == null
-                    val bodyWithContractDescription = withForcedLocalContext {
-                        convertFunctionBody(block, expression, allowLegacyContractDescription)
-                    }
+                    val bodyWithContractDescription =
+                        if (argumentLabelStatus != UsingArgumentLabelFunctionStatus.EXTERNAL) withForcedLocalContext {
+                            convertFunctionBody(block, expression, allowLegacyContractDescription)
+                        } else generateJumperBody(functionName, valueParameters, functionDeclaration)
                     this.body = bodyWithContractDescription.first
                     val contractDescription = outerContractDescription ?: bodyWithContractDescription.second
                     contractDescription?.let {
@@ -2461,11 +2502,12 @@ class LightTreeRawFirDeclarationBuilder(
         valueParameters: LighterASTNode,
         functionSymbol: FirFunctionSymbol<*>,
         valueParameterDeclaration: ValueParameterDeclaration,
-        additionalAnnotations: List<FirAnnotation> = emptyList()
+        additionalAnnotations: List<FirAnnotation> = emptyList(),
+        useFirstIdentifier: Boolean = true, // so take the first from each pair
     ): List<ValueParameter> {
         return valueParameters.forEachChildrenReturnList { node, container ->
             when (node.tokenType) {
-                VALUE_PARAMETER -> container += convertValueParameter(node, functionSymbol, valueParameterDeclaration, additionalAnnotations)
+                VALUE_PARAMETER -> container += convertValueParameter(node, functionSymbol, valueParameterDeclaration, additionalAnnotations, useFirstIdentifier)
             }
         }
     }
@@ -2477,7 +2519,8 @@ class LightTreeRawFirDeclarationBuilder(
         valueParameter: LighterASTNode,
         functionSymbol: FirFunctionSymbol<*>?,
         valueParameterDeclaration: ValueParameterDeclaration,
-        additionalAnnotations: List<FirAnnotation> = emptyList()
+        additionalAnnotations: List<FirAnnotation> = emptyList(),
+        useFirstIdentifier: Boolean = true, // so take the first from each pair
     ): ValueParameter {
         var modifiers = Modifier()
         val valueAnnotations = mutableListOf<FirAnnotationCall>()
@@ -2487,12 +2530,19 @@ class LightTreeRawFirDeclarationBuilder(
         var firType: FirTypeRef? = null
         var firExpression: FirExpression? = null
         var destructuringDeclaration: DestructuringDeclaration? = null
+        var alreadyGotFirst = false
         valueParameter.forEachChildren {
             when (it.tokenType) {
                 MODIFIER_LIST -> modifiers = convertModifierList(it)
                 VAL_KEYWORD -> isVal = true
                 VAR_KEYWORD -> isVar = true
-                IDENTIFIER -> identifier = it.asText
+                IDENTIFIER -> {
+                    if (!alreadyGotFirst || !useFirstIdentifier) {
+                        identifier = it.asText
+                    }
+
+                    alreadyGotFirst = true
+                }
                 TYPE_REFERENCE -> {}
                 DESTRUCTURING_DECLARATION -> destructuringDeclaration = convertDestructingDeclaration(it)
                 else -> if (it.isExpression()) firExpression = expressionConverter.getAsFirExpression(it, "Should have default value")

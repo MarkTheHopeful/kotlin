@@ -2580,6 +2580,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
     /*
      * functionParameterRest
      *   : parameter ("=" element)?
+     *   : label parameter ("=" element)?
      *   ;
      */
     private boolean parseFunctionParameterRest(boolean typeRequired) {
@@ -2600,6 +2601,10 @@ public class KotlinParsing extends AbstractKotlinParsing {
         }
         else {
             expect(IDENTIFIER, "Parameter name expected", PARAMETER_NAME_RECOVERY_SET);
+
+            if (at(IDENTIFIER)) {
+                expect(IDENTIFIER, "I guess the previous one was argument label...", PARAMETER_NAME_RECOVERY_SET);
+            }
 
             if (at(COLON)) {
                 advance(); // COLON

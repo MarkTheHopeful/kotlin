@@ -167,6 +167,9 @@ sealed class KtFakeSourceElementKind(final override val shouldSkipErrorTypeRepor
     object DesugaredPostfixInc : DesugaredIncrementOrDecrement()
     object DesugaredPostfixDec : DesugaredIncrementOrDecrement()
 
+    // If a function with argument labels is present, then the initial function is turned into internal one, and an external one, the jumper, is generated
+    object DuplicatedProxyExternalFunction : KtFakeSourceElementKind()
+
     // In ++a[1], a.get(1) will be called twice. This kind is used for the second call reference.
     sealed class DesugaredPrefixSecondGetReference : KtFakeSourceElementKind()
     object DesugaredPrefixIncSecondGetReference : DesugaredPrefixSecondGetReference()

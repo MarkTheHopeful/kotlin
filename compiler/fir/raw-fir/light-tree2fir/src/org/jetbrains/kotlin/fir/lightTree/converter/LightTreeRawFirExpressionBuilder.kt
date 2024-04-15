@@ -18,6 +18,7 @@ import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.fir.*
 import org.jetbrains.kotlin.fir.builder.*
 import org.jetbrains.kotlin.fir.declarations.FirDeclarationOrigin
+import org.jetbrains.kotlin.fir.declarations.FirValueParameter
 import org.jetbrains.kotlin.fir.declarations.FirVariable
 import org.jetbrains.kotlin.fir.declarations.builder.buildAnonymousFunction
 import org.jetbrains.kotlin.fir.declarations.builder.buildProperty
@@ -47,6 +48,7 @@ import org.jetbrains.kotlin.fir.types.FirTypeRef
 import org.jetbrains.kotlin.fir.types.builder.buildErrorTypeRef
 import org.jetbrains.kotlin.lexer.KtTokens.*
 import org.jetbrains.kotlin.name.CallableId
+import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 import org.jetbrains.kotlin.psi.stubs.elements.KtConstantExpressionElementType
 import org.jetbrains.kotlin.psi.stubs.elements.KtNameReferenceExpressionElementType
@@ -730,6 +732,29 @@ class LightTreeRawFirExpressionBuilder(
             this.explicitReceiver = explicitReceiver
             typeArguments += firTypeArguments
         }.build()
+    }
+
+    fun generateCustomCallExpression(
+        outerName: Name,
+        valueParameters: MutableList<FirValueParameter>,
+        originFunction: LighterASTNode
+    ): FirExpression {
+        val internalName: String = outerName.asString() + "$"
+
+        return buildFunctionCall {
+            calleeReference = buildSimpleNamedReference {
+                name = Name.identifier(internalName)
+                source = originFunction.toFirSourceElement(kind = KtFakeSourceElementKind.DuplicatedProxyExternalFunction)
+            }
+            argumentList = buildArgumentList {
+                arguments += valueParameters.map { parameter ->
+                    buildPropertyAccessExpression {
+                        calleeReference = buildSimpleNamedReference { name = parameter.name }
+                        source = originFunction.toFirSourceElement(kind = KtFakeSourceElementKind.DuplicatedProxyExternalFunction)
+                    }
+                }
+            }
+        }
     }
 
     /**
