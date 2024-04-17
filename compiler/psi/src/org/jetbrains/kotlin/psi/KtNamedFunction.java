@@ -287,4 +287,10 @@ public class KtNamedFunction extends KtTypeParameterListOwnerStub<KotlinFunction
 
         return KtPsiUtilKt.isContractPresentPsiCheck(this, isAllowedOnMembers);
     }
+
+    // if containsAL is true, and generateAsExternal is true, it will use argument labels and replace the body with a jumper
+    // if containsAL is true, but generateAsExternal is false, it will use parameter names, add '$' to the function name, but use the old body
+    // if containsAL is false, the function will be generated as usual
+    public boolean containsAL = false;
+    public boolean generateAsExternal = false;
 }
