@@ -675,6 +675,7 @@ open class PsiRawFirBuilder(
                 } else null
                 isCrossinline = hasModifier(CROSSINLINE_KEYWORD)
                 isNoinline = hasModifier(NOINLINE_KEYWORD)
+                isENF = hasModifier(ENF_KEYWORD)
                 containingFunctionSymbol = functionSymbol
                 annotations += additionalAnnotations
             }

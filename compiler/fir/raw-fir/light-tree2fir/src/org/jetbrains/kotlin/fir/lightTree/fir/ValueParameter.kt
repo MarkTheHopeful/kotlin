@@ -91,6 +91,7 @@ class ValueParameter(
             defaultValue = this@ValueParameter.defaultValue
             isCrossinline = modifiers.hasCrossinline()
             isNoinline = modifiers.hasNoinline()
+            isENF = modifiers.hasENF()
             containingFunctionSymbol = this@ValueParameter.containingFunctionSymbol
                 ?: error("containingFunctionSymbol should present when converting ValueParameter to a FirValueParameter")
 

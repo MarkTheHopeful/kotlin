@@ -56,6 +56,7 @@ internal class FirDefaultSetterValueParameter(
     override val isCrossinline: Boolean,
     override val isNoinline: Boolean,
     override val isVararg: Boolean,
+    override val isENF: Boolean,
 ) : FirValueParameter() {
     override val typeParameters: List<FirTypeParameterRef>
         get() = emptyList()

@@ -554,6 +554,7 @@ class FirSyntheticCallGenerator(
             this.name = name
             returnTypeRef = this@toValueParameter
             isCrossinline = false
+            isENF = false
             isNoinline = false
             this.isVararg = isVararg
             symbol = FirValueParameterSymbol(name)

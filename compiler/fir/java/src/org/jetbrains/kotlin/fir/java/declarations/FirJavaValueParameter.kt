@@ -62,6 +62,9 @@ class FirJavaValueParameter @FirImplementationDetail constructor(
     override val isNoinline: Boolean
         get() = false
 
+    override val isENF: Boolean
+        get() = TODO("Not yet implemented")
+
     override val isVal: Boolean
         get() = true
 

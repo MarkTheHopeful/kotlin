@@ -447,7 +447,7 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
             +field("containingFunctionSymbol", functionSymbolType.withArgs(TypeRef.Star)).apply {
                 withBindThis = false
             }
-            generateBooleanFields("crossinline", "noinline", "vararg")
+            generateBooleanFields("crossinline", "noinline", "vararg", "ENF")
         }
 
         receiverParameter.configure {
