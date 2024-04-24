@@ -2600,10 +2600,11 @@ public class KotlinParsing extends AbstractKotlinParsing {
             parseTypeRef();
         }
         else {
-            expect(IDENTIFIER, "Parameter name expected", PARAMETER_NAME_RECOVERY_SET);
-
-            if (at(IDENTIFIER)) {
-                expect(IDENTIFIER, "I guess the previous one was argument label...", PARAMETER_NAME_RECOVERY_SET);
+            if (at(IDENTIFIER) && lookahead(1) == IDENTIFIER) {
+                advance(); // Argument label
+                advance(); // Parameter Name
+            } else {
+                expect(IDENTIFIER, "Parameter name expected", PARAMETER_NAME_RECOVERY_SET);
             }
 
             if (at(COLON)) {

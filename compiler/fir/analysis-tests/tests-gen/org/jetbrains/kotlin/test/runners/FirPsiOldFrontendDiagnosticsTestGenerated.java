@@ -3660,6 +3660,28 @@ public class FirPsiOldFrontendDiagnosticsTestGenerated extends AbstractFirPsiDia
     }
 
     @Nested
+    @TestMetadata("compiler/testData/diagnostics/tests/argumentLabel")
+    @TestDataPath("$PROJECT_ROOT")
+    public class ArgumentLabel {
+      @Test
+      public void testAllFilesPresentInArgumentLabel() {
+        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/argumentLabel"), Pattern.compile("^(.*)\\.kts?$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
+      }
+
+      @Test
+      @TestMetadata("functionsWithALSimple.kt")
+      public void testFunctionsWithALSimple() {
+        runTest("compiler/testData/diagnostics/tests/argumentLabel/functionsWithALSimple.kt");
+      }
+
+      @Test
+      @TestMetadata("functionsWithoutAL.kt")
+      public void testFunctionsWithoutAL() {
+        runTest("compiler/testData/diagnostics/tests/argumentLabel/functionsWithoutAL.kt");
+      }
+    }
+
+    @Nested
     @TestMetadata("compiler/testData/diagnostics/tests/backingField")
     @TestDataPath("$PROJECT_ROOT")
     public class BackingField {
