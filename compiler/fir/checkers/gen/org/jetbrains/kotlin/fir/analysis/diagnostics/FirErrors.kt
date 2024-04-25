@@ -410,6 +410,7 @@ object FirErrors {
     val INAPPLICABLE_LATEINIT_MODIFIER: KtDiagnosticFactory1<String> by error1<KtModifierListOwner, String>(SourceElementPositioningStrategies.LATEINIT_MODIFIER)
     val VARARG_OUTSIDE_PARENTHESES: KtDiagnosticFactory0 by error0<KtElement>()
     val NAMED_ARGUMENTS_NOT_ALLOWED: KtDiagnosticFactory1<ForbiddenNamedArgumentsTarget> by error1<KtValueArgument, ForbiddenNamedArgumentsTarget>(SourceElementPositioningStrategies.NAME_OF_NAMED_ARGUMENT)
+    val POSITIONAL_USED_WITH_ENF: KtDiagnosticFactory0 by error0<KtValueArgument>()
     val NON_VARARG_SPREAD: KtDiagnosticFactory0 by error0<LeafPsiElement>()
     val ARGUMENT_PASSED_TWICE: KtDiagnosticFactory0 by error0<KtValueArgument>(SourceElementPositioningStrategies.NAME_OF_NAMED_ARGUMENT)
     val TOO_MANY_ARGUMENTS: KtDiagnosticFactory1<FirCallableSymbol<*>> by error1<PsiElement, FirCallableSymbol<*>>()

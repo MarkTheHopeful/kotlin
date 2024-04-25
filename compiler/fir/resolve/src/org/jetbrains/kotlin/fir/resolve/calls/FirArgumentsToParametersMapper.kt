@@ -202,7 +202,7 @@ private class FirCallArgumentsProcessor(
         return if (!parameter.isVararg) {
             currentPositionedParameterIndex++
             if (parameter.isENF) {
-                throw RuntimeException("Encountered positional usage for argument with enf")
+                addDiagnostic(PositionalUsageWithENF(argument))
             }
             result[parameter] = ResolvedCallArgument.SimpleArgument(argument)
             state = State.POSITION_ARGUMENTS
