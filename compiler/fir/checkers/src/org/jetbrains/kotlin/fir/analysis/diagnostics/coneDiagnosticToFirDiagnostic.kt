@@ -294,7 +294,8 @@ private fun mapInapplicableCandidateError(
             )
 
             is PositionalUsageWithENF -> FirErrors.POSITIONAL_USED_WITH_ENF.createOn(
-                rootCause.argument.source
+                rootCause.argument.source,
+                rootCause.valueParameter.symbol
             )
 
             is ArgumentTypeMismatch -> {

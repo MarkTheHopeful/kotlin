@@ -56,13 +56,13 @@ internal class FirDefaultSetterValueParameter(
     override val isCrossinline: Boolean,
     override val isNoinline: Boolean,
     override val isVararg: Boolean,
-    override val isENF: Boolean,
 ) : FirValueParameter() {
     override val typeParameters: List<FirTypeParameterRef>
         get() = emptyList()
     override var status: FirDeclarationStatus = FirResolvedDeclarationStatusImpl.DEFAULT_STATUS_FOR_STATUSLESS_DECLARATIONS
     override val name: Name = Name.identifier("value")
     override var controlFlowGraphReference: FirControlFlowGraphReference? = null
+    override val isENF: Boolean = false
 
     init {
         symbol.bind(this)

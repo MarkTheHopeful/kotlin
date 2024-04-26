@@ -1718,6 +1718,12 @@ internal class NonVarargSpreadImpl(
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<LeafPsiElement>(firDiagnostic, token), KtFirDiagnostic.NonVarargSpread
 
+internal class PositionalUsedWithEnfImpl(
+    override val violatedParameter: KtSymbol,
+    firDiagnostic: KtPsiDiagnostic,
+    token: KtLifetimeToken,
+) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.PositionalUsedWithEnf
+
 internal class ArgumentPassedTwiceImpl(
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,

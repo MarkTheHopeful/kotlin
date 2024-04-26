@@ -53,7 +53,6 @@ class FirDefaultSetterValueParameterBuilder : FirAnnotationContainerBuilder {
     var isCrossinline: Boolean = false
     var isNoinline: Boolean = false
     var isVararg: Boolean = false
-    var isENF: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
 
     override fun build(): FirValueParameter {
         return FirDefaultSetterValueParameter(
@@ -82,7 +81,6 @@ class FirDefaultSetterValueParameterBuilder : FirAnnotationContainerBuilder {
             isCrossinline,
             isNoinline,
             isVararg,
-            isENF,
         )
     }
 

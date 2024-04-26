@@ -600,6 +600,7 @@ internal class StubBasedFirMemberDeserializer(
                 defaultValue = if (ktParameter.hasDefaultValue() || addDefaultValue) {
                     buildExpressionStub()
                 } else null
+                isENF = ktParameter.hasModifier(KtTokens.ENF_KEYWORD)
                 isCrossinline = ktParameter.hasModifier(KtTokens.CROSSINLINE_KEYWORD)
                 isNoinline = ktParameter.hasModifier(KtTokens.NOINLINE_KEYWORD)
                 annotations += c.annotationDeserializer.loadAnnotations(

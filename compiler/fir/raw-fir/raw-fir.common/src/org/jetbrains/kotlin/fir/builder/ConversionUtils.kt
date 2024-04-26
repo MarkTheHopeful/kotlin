@@ -501,6 +501,7 @@ fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
                 isCrossinline = false
                 isNoinline = false
                 isVararg = false
+                isENF = false
                 if (parameterAnnotations != null) {
                     this.annotations.addAll(parameterAnnotations)
                 }

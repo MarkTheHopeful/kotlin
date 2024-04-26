@@ -1262,7 +1262,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(VARARG_OUTSIDE_PARENTHESES, "Passing value as a vararg is allowed only inside a parenthesized argument list.")
         map.put(NAMED_ARGUMENTS_NOT_ALLOWED, "Named arguments are prohibited for {0}.", TO_STRING)
         map.put(NON_VARARG_SPREAD, "The spread operator (*foo) can only be applied in a vararg position.")
-        map.put(POSITIONAL_USED_WITH_ENF, "Positional form is prohibited for parameter with enforced named form modifier")
+        map.put(POSITIONAL_USED_WITH_ENF, "Positional form is prohibited for parameter ''{0}'' with enforced named form modifier.", DECLARATION_NAME)
         map.put(TOO_MANY_ARGUMENTS, "Too many arguments for ''{0}''.", FQ_NAMES_IN_TYPES)
         map.put(ARGUMENT_PASSED_TWICE, "Argument already passed for this parameter.")
         map.put(NO_VALUE_FOR_PARAMETER, "No value passed for parameter ''{0}''.", DECLARATION_NAME)

@@ -63,7 +63,7 @@ class FirJavaValueParameter @FirImplementationDetail constructor(
         get() = false
 
     override val isENF: Boolean
-        get() = TODO("Not yet implemented")
+        get() = false // FIXME: Temporary solution, clarification needed
 
     override val isVal: Boolean
         get() = true

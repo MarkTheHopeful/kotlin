@@ -1231,6 +1231,7 @@ fun <TBase, TSource : TBase, TParameter : TBase> FirRegularClassBuilder.createDa
                 defaultValue = generateComponentAccess(parameterSource, firProperty, classTypeRef, propertyReturnTypeRef)
                 isCrossinline = false
                 isNoinline = false
+                isENF = false // FIXME: Maybe we need to add some kind of isENF function here
                 this.isVararg = isVararg(ktParameter)
                 addValueParameterAnnotations(ktParameter)
                 for (annotation in annotations) {

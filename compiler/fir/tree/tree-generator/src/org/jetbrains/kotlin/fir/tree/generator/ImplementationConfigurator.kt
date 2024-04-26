@@ -608,6 +608,13 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
         }
 
         configureFieldInAllImplementations(
+            "isENF",
+            implementationPredicate = { it.typeName == "FirDefaultSetterValueParameter" }
+        ) {
+            default(it, "false")
+        }
+
+        configureFieldInAllImplementations(
             "typeParameters",
             implementationPredicate = { it.typeName in implementationsWithoutStatusAndTypeParameters }
         ) {

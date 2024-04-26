@@ -202,7 +202,7 @@ private class FirCallArgumentsProcessor(
         return if (!parameter.isVararg) {
             currentPositionedParameterIndex++
             if (parameter.isENF) {
-                addDiagnostic(PositionalUsageWithENF(argument))
+                addDiagnostic(PositionalUsageWithENF(argument, parameter))
             }
             result[parameter] = ResolvedCallArgument.SimpleArgument(argument)
             state = State.POSITION_ARGUMENTS

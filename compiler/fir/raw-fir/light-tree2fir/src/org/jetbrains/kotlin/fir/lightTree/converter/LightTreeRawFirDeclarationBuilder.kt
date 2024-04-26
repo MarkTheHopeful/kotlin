@@ -1758,6 +1758,7 @@ class LightTreeRawFirDeclarationBuilder(
             isCrossinline = modifiers.hasCrossinline() || firValueParameter.isCrossinline
             isNoinline = modifiers.hasNoinline() || firValueParameter.isNoinline
             isVararg = modifiers.hasVararg() || firValueParameter.isVararg
+            isENF = modifiers.hasENF() || firValueParameter.isENF
             annotations += firValueParameter.annotations
             annotations += additionalAnnotations
         }
