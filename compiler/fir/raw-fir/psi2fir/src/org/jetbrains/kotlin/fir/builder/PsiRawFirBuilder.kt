@@ -1880,10 +1880,9 @@ open class PsiRawFirBuilder(
                             returnTypeRef = valueParameter.typeReference.toFirOrImplicitType()
                             this.name = name
                             symbol = FirValueParameterSymbol(name)
-                            isENF = false // FIXME: I think we can actually say that lambda is enf...
                             isCrossinline = false
                             isNoinline = false
-                            isVararg = false
+                            isVararg = false; isENF = false
                         }
                         addDestructuringVariables(
                             destructuringVariables,
