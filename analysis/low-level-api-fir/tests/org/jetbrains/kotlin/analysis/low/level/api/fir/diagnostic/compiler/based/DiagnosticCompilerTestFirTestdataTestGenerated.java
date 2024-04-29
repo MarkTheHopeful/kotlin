@@ -830,6 +830,18 @@ public class DiagnosticCompilerTestFirTestdataTestGenerated extends AbstractDiag
       public void testFunctionsWithoutAL() {
         runTest("compiler/fir/analysis-tests/testData/resolve/argumentLabel/functionsWithoutAL.kt");
       }
+
+      @Test
+      @TestMetadata("NoinlineWithAL.kt")
+      public void testNoinlineWithAL() {
+        runTest("compiler/fir/analysis-tests/testData/resolve/argumentLabel/NoinlineWithAL.kt");
+      }
+
+      @Test
+      @TestMetadata("VarargWithAL.kt")
+      public void testVarargWithAL() {
+        runTest("compiler/fir/analysis-tests/testData/resolve/argumentLabel/VarargWithAL.kt");
+      }
     }
 
     @Nested

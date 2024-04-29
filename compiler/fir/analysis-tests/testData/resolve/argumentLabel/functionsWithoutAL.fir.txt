@@ -7,7 +7,20 @@ FILE: functionsWithoutAL.kt
         ^fb Int(3)
     }
     public final fun fc(a: R|kotlin/Int|, b: R|kotlin/String|, vararg c: R|kotlin/IntArray|): R|kotlin/Int| {
-        ^fc R|<local>/a|.R|kotlin/Int.plus|(Int(3))
+        lvar sum: R|kotlin/Int| = Int(0)
+         {
+            lval <iterator>: R|kotlin/collections/IntIterator| = R|<local>/c|.R|kotlin/IntArray.iterator|()
+            while(R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/IntIterator.hasNext: R|kotlin/Boolean|>|()) {
+                lval ci: R|kotlin/Int| = R|<local>/<iterator>|.R|kotlin/collections/IntIterator.next|()
+                 {
+                    R|<local>/sum| = R|<local>/sum|.R|kotlin/Int.plus|(R|<local>/ci|)
+                }
+
+            }
+
+        }
+
+        ^fc R|<local>/sum|
     }
     public final val ff: R|(@R|kotlin/ParameterName|(name = String(test))  kotlin/Int) -> kotlin/Unit| = fun <anonymous>(it: R|@R|kotlin/ParameterName|(name = String(test))  kotlin/Int|): R|kotlin/Unit| <inline=Unknown>  {
         ^ Unit
@@ -29,3 +42,6 @@ FILE: functionsWithoutAL.kt
     }
 
         public get(): R|(kotlin/Function1<kotlin/Function1<@R|kotlin/ParameterName|(name = String(test))  kotlin/Int, kotlin/Unit>, kotlin/Unit>) -> kotlin/Unit|
+    public final inline fun fd(noinline notInlined: R|() -> kotlin/Int|): R|kotlin/Int| {
+        ^fd R|<local>/notInlined|.R|SubstitutionOverride<kotlin/Function0.invoke: R|kotlin/Int|>|()
+    }
