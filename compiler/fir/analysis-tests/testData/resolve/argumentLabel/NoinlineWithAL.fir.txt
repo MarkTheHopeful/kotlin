@@ -1,0 +1,13 @@
+FILE: NoinlineWithAL.kt
+    public final inline fun withNoinline$(noinline name: R|() -> kotlin/Unit|): R|kotlin/Unit| {
+        R|<local>/name|.R|SubstitutionOverride<kotlin/Function0.invoke: R|kotlin/Unit|>|()
+    }
+    public final inline fun withNoinline(noinline label: R|() -> kotlin/Unit|): R|kotlin/Unit| {
+        ^withNoinline R|/withNoinline$|(R|<local>/label|)
+    }
+    public final fun usingNoinline(): R|kotlin/Unit| {
+        R|/withNoinline|(withNoinline@fun <anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+            ^@withNoinline Unit
+        }
+        )
+    }
