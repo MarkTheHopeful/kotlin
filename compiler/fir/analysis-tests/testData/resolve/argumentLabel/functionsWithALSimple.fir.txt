@@ -1,0 +1,45 @@
+FILE: functionsWithALSimple.kt
+    public final fun fa$(name: R|kotlin/Int|): R|kotlin/Unit| {
+    }
+    public final fun fa(label: R|kotlin/Int|): R|kotlin/Unit| {
+        ^fa R|/fa$|(R|<local>/label|)
+    }
+    public final fun fb$(name: R|kotlin/Int|, secondName: R|kotlin/String|): R|kotlin/Unit| {
+    }
+    public final fun fb(label: R|kotlin/Int|, secondLabel: R|kotlin/String|): R|kotlin/Unit| {
+        ^fb R|/fb$|(R|<local>/label|, R|<local>/secondLabel|)
+    }
+    public final fun fc$(name: R|kotlin/Int|, usual: R|kotlin/String|): R|kotlin/Unit| {
+    }
+    public final fun fc(label: R|kotlin/Int|, usual: R|kotlin/String|): R|kotlin/Unit| {
+        ^fc R|/fc$|(R|<local>/label|, R|<local>/usual|)
+    }
+    public final fun fd$(before: R|kotlin/Double|, name: R|kotlin/Int|): R|kotlin/Unit| {
+    }
+    public final fun fd(before: R|kotlin/Double|, label: R|kotlin/Int|): R|kotlin/Unit| {
+        ^fd R|/fd$|(R|<local>/before|, R|<local>/label|)
+    }
+    public final fun ga$(inside: R|kotlin/String|): R|kotlin/String| {
+        ^ga$ R|<local>/inside|
+    }
+    public final fun ga(outside: R|kotlin/String|): R|kotlin/String| {
+        ^ga R|/ga$|(R|<local>/outside|)
+    }
+    public final fun gb$(inside: R|kotlin/String|): R|kotlin/String| {
+        ^gb$ <Unresolved name: outside>#
+    }
+    public final fun gb(outside: R|kotlin/String|): R|kotlin/String| {
+        ^gb R|/gb$|(R|<local>/outside|)
+    }
+    public final fun ha$(inside: R|kotlin/Int|): R|kotlin/Int| {
+        ^ha$ R|<local>/inside|
+    }
+    public final fun ha(outside: R|kotlin/Int|): R|kotlin/Int| {
+        ^ha R|/ha$|(R|<local>/outside|)
+    }
+    public final fun hb(regular: R|kotlin/Int|): R|kotlin/Int| {
+        ^hb R|/ha|(R|<local>/regular|)
+    }
+    public final fun hc(regular: R|kotlin/Int|): R|kotlin/Int| {
+        ^hc R|/ha<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /ha>#|(R|<local>/regular|)
+    }

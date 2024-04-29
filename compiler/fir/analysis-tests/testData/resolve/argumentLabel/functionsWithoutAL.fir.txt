@@ -1,0 +1,31 @@
+FILE: functionsWithoutAL.kt
+    public final fun f(): R|kotlin/Unit| {
+    }
+    public final fun fa(a: R|kotlin/Int|): R|kotlin/Unit| {
+    }
+    public final fun fb(): R|kotlin/Int| {
+        ^fb Int(3)
+    }
+    public final fun fc(a: R|kotlin/Int|, b: R|kotlin/String|, vararg c: R|kotlin/IntArray|): R|kotlin/Int| {
+        ^fc R|<local>/a|.R|kotlin/Int.plus|(Int(3))
+    }
+    public final val ff: R|(@R|kotlin/ParameterName|(name = String(test))  kotlin/Int) -> kotlin/Unit| = fun <anonymous>(it: R|@R|kotlin/ParameterName|(name = String(test))  kotlin/Int|): R|kotlin/Unit| <inline=Unknown>  {
+        ^ Unit
+    }
+
+        public get(): R|(@R|kotlin/ParameterName|(name = String(test))  kotlin/Int) -> kotlin/Unit|
+    public final val fg: R|(kotlin/Function1<@R|kotlin/ParameterName|(name = String(test))  kotlin/Int, kotlin/Unit>) -> kotlin/Unit| = fun <anonymous>(it: R|(@R|kotlin/ParameterName|(name = String(test))  kotlin/Int) -> kotlin/Unit|): R|kotlin/Unit| <inline=Unknown>  {
+        ^ Unit
+    }
+
+        public get(): R|(kotlin/Function1<@R|kotlin/ParameterName|(name = String(test))  kotlin/Int, kotlin/Unit>) -> kotlin/Unit|
+    public final val fh: R|(kotlin/Function1<kotlin/Function1<@R|kotlin/ParameterName|(name = String(test))  kotlin/Int, kotlin/Unit>, kotlin/Unit>) -> kotlin/Unit| = fun <anonymous>(it: R|(kotlin/Function1<@R|kotlin/ParameterName|(name = String(test))  kotlin/Int, kotlin/Unit>) -> kotlin/Unit|): R|kotlin/Unit| <inline=Unknown>  {
+        ^ Unit
+    }
+
+        public get(): R|(kotlin/Function1<kotlin/Function1<@R|kotlin/ParameterName|(name = String(test))  kotlin/Int, kotlin/Unit>, kotlin/Unit>) -> kotlin/Unit|
+    public final val fab: R|(kotlin/Function1<kotlin/Function1<@R|kotlin/ParameterName|(name = String(test))  kotlin/Int, kotlin/Unit>, kotlin/Unit>) -> kotlin/Unit| = fun <anonymous>(it: R|(kotlin/Function1<@R|kotlin/ParameterName|(name = String(test))  kotlin/Int, kotlin/Unit>) -> kotlin/Unit|): R|kotlin/Unit| <inline=Unknown>  {
+        ^ Unit
+    }
+
+        public get(): R|(kotlin/Function1<kotlin/Function1<@R|kotlin/ParameterName|(name = String(test))  kotlin/Int, kotlin/Unit>, kotlin/Unit>) -> kotlin/Unit|

@@ -15,7 +15,7 @@ fun ga(outside inside: String): String {
 }
 
 fun gb(outside inside: String): String {
-    return outside
+    return <!UNRESOLVED_REFERENCE!>outside<!>
 }
 
 fun ha(outside inside: Int): Int {
@@ -27,5 +27,5 @@ fun hb(regular: Int): Int {
 }
 
 fun hc(regular: Int): Int {
-    return ha(inside = regular)
+    return ha(<!NO_VALUE_FOR_PARAMETER!><!NAMED_PARAMETER_NOT_FOUND!>inside<!> = regular)<!>
 }

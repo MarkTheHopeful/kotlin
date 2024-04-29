@@ -811,6 +811,28 @@ public class FirLightTreeDiagnosticsTestGenerated extends AbstractFirLightTreeDi
     }
 
     @Nested
+    @TestMetadata("compiler/fir/analysis-tests/testData/resolve/argumentLabel")
+    @TestDataPath("$PROJECT_ROOT")
+    public class ArgumentLabel {
+      @Test
+      public void testAllFilesPresentInArgumentLabel() {
+        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/fir/analysis-tests/testData/resolve/argumentLabel"), Pattern.compile("^([^.]+)\\.kt$"), null, true);
+      }
+
+      @Test
+      @TestMetadata("functionsWithALSimple.kt")
+      public void testFunctionsWithALSimple() {
+        runTest("compiler/fir/analysis-tests/testData/resolve/argumentLabel/functionsWithALSimple.kt");
+      }
+
+      @Test
+      @TestMetadata("functionsWithoutAL.kt")
+      public void testFunctionsWithoutAL() {
+        runTest("compiler/fir/analysis-tests/testData/resolve/argumentLabel/functionsWithoutAL.kt");
+      }
+    }
+
+    @Nested
     @TestMetadata("compiler/fir/analysis-tests/testData/resolve/arguments")
     @TestDataPath("$PROJECT_ROOT")
     public class Arguments {

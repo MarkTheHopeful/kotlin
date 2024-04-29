@@ -3660,28 +3660,6 @@ public class DiagnosticCompilerTestFE10TestdataTestGenerated extends AbstractDia
     }
 
     @Nested
-    @TestMetadata("compiler/testData/diagnostics/tests/argumentLabel")
-    @TestDataPath("$PROJECT_ROOT")
-    public class ArgumentLabel {
-      @Test
-      public void testAllFilesPresentInArgumentLabel() {
-        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/argumentLabel"), Pattern.compile("^(.+)\\.(kt|kts)$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true);
-      }
-
-      @Test
-      @TestMetadata("functionsWithALSimple.kt")
-      public void testFunctionsWithALSimple() {
-        runTest("compiler/testData/diagnostics/tests/argumentLabel/functionsWithALSimple.kt");
-      }
-
-      @Test
-      @TestMetadata("functionsWithoutAL.kt")
-      public void testFunctionsWithoutAL() {
-        runTest("compiler/testData/diagnostics/tests/argumentLabel/functionsWithoutAL.kt");
-      }
-    }
-
-    @Nested
     @TestMetadata("compiler/testData/diagnostics/tests/backingField")
     @TestDataPath("$PROJECT_ROOT")
     public class BackingField {

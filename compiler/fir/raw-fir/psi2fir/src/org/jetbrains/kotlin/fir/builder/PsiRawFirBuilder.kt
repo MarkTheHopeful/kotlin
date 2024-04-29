@@ -453,13 +453,15 @@ open class PsiRawFirBuilder(
                             calleeReference = buildSimpleNamedReference {
                                 name = parameter.name?.let { Name.identifier(it) }
                                     ?: throw RuntimeException("Got a nameless argument while building a jumper body for a function with Argument Labels")
+                                source =
+                                    this@generateCustomJumpCallExpression.toFirSourceElement(kind = KtFakeSourceElementKind.DuplicatedProxyExternalFunction)
                             }
                             source =
                                 this@generateCustomJumpCallExpression.toFirSourceElement(kind = KtFakeSourceElementKind.DuplicatedProxyExternalFunction)
                         }
                     }
                 }
-            }
+            }.also { it.source }
         }
 
         private fun KtNamedFunction.buildJumperBody(): Pair<FirBlock?, FirContractDescription?> {
@@ -678,12 +680,12 @@ open class PsiRawFirBuilder(
 //            this.originalElement.node.children().forEach {
 //                println("$it, ${it.text}")
 //            }
-            val name = if (useFirstIdentifier) {
+            val name = if (useFirstIdentifier || this.originalElement.node.children().count { it.elementType == IDENTIFIER } == 1) {
                 convertValueParameterName(nameAsSafeName, valueParameterDeclaration) { nameIdentifier?.node?.text }
             } else {
                 Name.identifier(
                     this.originalElement.node.children().filter { it.elementType == IDENTIFIER }.withIndex()
-                        .first { it.index == 1 }.value.text
+                        .first { it.index == 1 }.value.text,
                 )
 //                convertValueParameterName(nameAsSafeName, valueParameterDeclaration) { nameIdentifier?.node?.text }
             }
@@ -1299,6 +1301,7 @@ open class PsiRawFirBuilder(
                                     declaration.containsAL = true
                                     declaration.generateAsExternal = false // parameter names, function name with '$', normal body
                                     declarations += declaration.convert<FirFunction>()
+                                    declaration.containsAL = false // I'm a little bit suspicious
                                     declaration.generateAsExternal = true // argument labels, normal function name, jumper body
                                     declaration.convert()
                                 } else {
