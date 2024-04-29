@@ -1,0 +1,39 @@
+FILE: SimpleENF.kt
+    public final fun fa(a: R|kotlin/Int|): R|kotlin/Unit| {
+    }
+    public final fun fb(a: R|kotlin/Int|, b: R|kotlin/String|): R|kotlin/Unit| {
+    }
+    public final fun fc(a: R|kotlin/Int|, b: R|kotlin/Array<kotlin/String>|): R|kotlin/Unit| {
+    }
+    public final fun fd(a: R|kotlin/Char|, b: R|kotlin/String|): R|kotlin/Unit| {
+    }
+    public final fun gaa(): R|kotlin/Unit| {
+        R|/fa|(Int(10))
+    }
+    public final fun gab(): R|kotlin/Unit| {
+        R|/fa<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /fa>#|(Int(10))
+    }
+    public final fun gba(): R|kotlin/Unit| {
+        R|/fb|(Int(10), String(Hello))
+    }
+    public final fun gbb(): R|kotlin/Unit| {
+        R|/fb<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /fb>#|(Int(10), String(Hello))
+    }
+    public final fun gbc(): R|kotlin/Unit| {
+        R|/fb<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /fb>#|(Int(10), String(Hello))
+    }
+    public final fun gca(): R|kotlin/Unit| {
+        R|/fc|(Int(10), R|kotlin/emptyArray|<R|kotlin/String|>())
+    }
+    public final fun gcb(): R|kotlin/Unit| {
+        R|/fc<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /fc>#|(Int(10), R|kotlin/emptyArray|<R|kotlin/String|>())
+    }
+    public final fun gda(): R|kotlin/Unit| {
+        R|/fd<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /fd>#|(Char(a), String())
+    }
+    public final fun gdb(): R|kotlin/Unit| {
+        R|/fd|(Char(a), String())
+    }
+    public final fun gdc(): R|kotlin/Unit| {
+        R|/fd<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /fd>#|(Char(a), String())
+    }
