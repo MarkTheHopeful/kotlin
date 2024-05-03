@@ -2170,24 +2170,6 @@ public class DiagnosticCompilerTestFirTestdataTestGenerated extends AbstractDiag
       public void testAllFilesPresentInEnf() {
         KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/fir/analysis-tests/testData/resolve/enf"), Pattern.compile("^([^.]+)\\.kt$"), null, true);
       }
-
-      @Test
-      @TestMetadata("CombinedENF.kt")
-      public void testCombinedENF() {
-        runTest("compiler/fir/analysis-tests/testData/resolve/enf/CombinedENF.kt");
-      }
-
-      @Test
-      @TestMetadata("ENFInOtherPlaces.kt")
-      public void testENFInOtherPlaces() {
-        runTest("compiler/fir/analysis-tests/testData/resolve/enf/ENFInOtherPlaces.kt");
-      }
-
-      @Test
-      @TestMetadata("SimpleENF.kt")
-      public void testSimpleENF() {
-        runTest("compiler/fir/analysis-tests/testData/resolve/enf/SimpleENF.kt");
-      }
     }
 
     @Nested
