@@ -2527,6 +2527,7 @@ class LightTreeRawFirDeclarationBuilder(
         var isVal = false
         var isVar = false
         var identifier: String? = null
+        var labelIdentifier: String? = null
         var firType: FirTypeRef? = null
         var firExpression: FirExpression? = null
         var destructuringDeclaration: DestructuringDeclaration? = null
@@ -2537,19 +2538,24 @@ class LightTreeRawFirDeclarationBuilder(
                 VAL_KEYWORD -> isVal = true
                 VAR_KEYWORD -> isVar = true
                 IDENTIFIER -> {
-                    if (!alreadyGotFirst || !useFirstIdentifier) {
+                    if (!alreadyGotFirst) {
                         identifier = it.asText
+                        alreadyGotFirst = true
+                    } else {
+                        labelIdentifier = it.asText
                     }
-
-                    alreadyGotFirst = true
                 }
                 TYPE_REFERENCE -> {}
                 DESTRUCTURING_DECLARATION -> destructuringDeclaration = convertDestructingDeclaration(it)
                 else -> if (it.isExpression()) firExpression = expressionConverter.getAsFirExpression(it, "Should have default value")
             }
         }
+        if (labelIdentifier == null) {
+            labelIdentifier = identifier
+        }
 
         val name = convertValueParameterName(identifier.nameAsSafeName(), valueParameterDeclaration) { identifier }
+        val argumentLabel = convertValueParameterName(labelIdentifier.nameAsSafeName(), valueParameterDeclaration) { labelIdentifier }
         val valueParameterSymbol = FirValueParameterSymbol(name)
         withContainerSymbol(valueParameterSymbol, isLocal = valueParameterDeclaration != ValueParameterDeclaration.FUNCTION) {
             valueParameter.forEachChildren {
@@ -2579,7 +2585,8 @@ class LightTreeRawFirDeclarationBuilder(
             name = name,
             defaultValue = firExpression,
             containingFunctionSymbol = functionSymbol,
-            destructuringDeclaration = destructuringDeclaration
+            destructuringDeclaration = destructuringDeclaration,
+            argumentLabel = argumentLabel
         )
     }
 

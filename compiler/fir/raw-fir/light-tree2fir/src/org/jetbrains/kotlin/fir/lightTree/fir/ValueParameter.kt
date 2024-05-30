@@ -58,7 +58,8 @@ class ValueParameter(
     val name: Name,
     val defaultValue: FirExpression?,
     private val containingFunctionSymbol: FirFunctionSymbol<*>?,
-    val destructuringDeclaration: DestructuringDeclaration? = null
+    val destructuringDeclaration: DestructuringDeclaration? = null,
+    val argumentLabel: Name = name
 ) {
     fun hasValOrVar(): Boolean {
         return isVal || isVar
