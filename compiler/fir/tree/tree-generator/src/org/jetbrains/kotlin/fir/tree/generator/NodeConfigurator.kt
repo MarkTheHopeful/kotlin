@@ -6,6 +6,7 @@
 package org.jetbrains.kotlin.fir.tree.generator
 
 import org.jetbrains.kotlin.fir.tree.generator.FieldSets.annotations
+import org.jetbrains.kotlin.fir.tree.generator.FieldSets.argumentLabel
 import org.jetbrains.kotlin.fir.tree.generator.FieldSets.arguments
 import org.jetbrains.kotlin.fir.tree.generator.FieldSets.body
 import org.jetbrains.kotlin.fir.tree.generator.FieldSets.calleeReference
@@ -443,6 +444,7 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
 
         valueParameter.configure {
             +symbol("FirValueParameterSymbol")
+            +argumentLabel
             +field("defaultValue", expression, nullable = true, withReplace = true)
             +field("containingFunctionSymbol", functionSymbolType.withArgs(TypeRef.Star)).apply {
                 withBindThis = false

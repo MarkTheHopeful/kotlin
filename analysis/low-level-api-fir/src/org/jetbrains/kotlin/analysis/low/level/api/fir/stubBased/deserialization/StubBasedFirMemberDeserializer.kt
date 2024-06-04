@@ -605,6 +605,7 @@ internal class StubBasedFirMemberDeserializer(
                 annotations += c.annotationDeserializer.loadAnnotations(
                     ktParameter
                 )
+                this.argumentLabel = ktParameter.labelAsSafeName
             }
         }.toList()
     }

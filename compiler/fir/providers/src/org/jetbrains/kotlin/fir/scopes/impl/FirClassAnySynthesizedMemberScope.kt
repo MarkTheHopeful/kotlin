@@ -147,6 +147,7 @@ class FirClassAnySynthesizedMemberScope(
             this.valueParameters.add(
                 buildValueParameter {
                     this.name = Name.identifier("other")
+                    this.argumentLabel = this.name
                     origin = originForFunctions
                     moduleData = baseModuleData
                     this.returnTypeRef = FirImplicitNullableAnyTypeRef(null)

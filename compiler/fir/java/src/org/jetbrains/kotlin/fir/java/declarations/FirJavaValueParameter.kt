@@ -42,6 +42,7 @@ class FirJavaValueParameter @FirImplementationDetail constructor(
     var lazyDefaultValue: Lazy<FirExpression>?,
     override val containingFunctionSymbol: FirFunctionSymbol<*>,
     override val isVararg: Boolean,
+    override val argumentLabel: Name = name
 ) : FirValueParameter() {
     override var defaultValue: FirExpression?
         get() = lazyDefaultValue?.value

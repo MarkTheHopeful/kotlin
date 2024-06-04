@@ -347,6 +347,7 @@ class FirCallCompleter(
                         isCrossinline = false
                         isNoinline = false
                         isVararg = false
+                        argumentLabel = name
                     }
                 }
                 else -> null

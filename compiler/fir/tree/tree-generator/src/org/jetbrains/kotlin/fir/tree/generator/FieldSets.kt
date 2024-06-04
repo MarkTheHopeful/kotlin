@@ -74,6 +74,8 @@ object FieldSets {
 
     val name by lazy { field(nameType) }
 
+    val argumentLabel by lazy { field("argumentLabel", nameType) }
+
     val initializer by lazy { field("initializer", expression, nullable = true) }
 
     fun superTypeRefs(withReplace: Boolean = false) = fieldList("superTypeRefs", typeRef, withReplace)

@@ -1213,6 +1213,7 @@ open class FirDeclarationsResolveTransformer(
                     isCrossinline = false
                     isNoinline = false
                     isVararg = false
+                    this.argumentLabel = name
                 }
                 listOf(itParam)
             }

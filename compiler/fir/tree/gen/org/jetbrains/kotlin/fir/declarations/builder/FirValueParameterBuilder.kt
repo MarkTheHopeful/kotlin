@@ -43,6 +43,7 @@ open class FirValueParameterBuilder : FirAnnotationContainerBuilder {
     open var backingField: FirBackingField? = null
     override val annotations: MutableList<FirAnnotation> = mutableListOf()
     open lateinit var symbol: FirValueParameterSymbol
+    open lateinit var argumentLabel: Name
     open var defaultValue: FirExpression? = null
     open lateinit var containingFunctionSymbol: FirFunctionSymbol<*>
     open var isCrossinline: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
@@ -65,6 +66,7 @@ open class FirValueParameterBuilder : FirAnnotationContainerBuilder {
             backingField,
             annotations.toMutableOrEmpty(),
             symbol,
+            argumentLabel,
             defaultValue,
             containingFunctionSymbol,
             isCrossinline,
@@ -103,6 +105,7 @@ inline fun buildValueParameterCopy(original: FirValueParameter, init: FirValuePa
     copyBuilder.backingField = original.backingField
     copyBuilder.annotations.addAll(original.annotations)
     copyBuilder.symbol = original.symbol
+    copyBuilder.argumentLabel = original.argumentLabel
     copyBuilder.defaultValue = original.defaultValue
     copyBuilder.containingFunctionSymbol = original.containingFunctionSymbol
     copyBuilder.isCrossinline = original.isCrossinline

@@ -198,6 +198,7 @@ class LightTreeRawFirExpressionBuilder(
                         origin = FirDeclarationOrigin.Source
                         returnTypeRef = valueParameter.firValueParameter.returnTypeRef
                         this.name = name
+                        this.argumentLabel = name
                         symbol = FirValueParameterSymbol(name)
                         defaultValue = null
                         isCrossinline = false
@@ -732,29 +733,6 @@ class LightTreeRawFirExpressionBuilder(
             this.explicitReceiver = explicitReceiver
             typeArguments += firTypeArguments
         }.build()
-    }
-
-    fun generateCustomCallExpression(
-        outerName: Name,
-        valueParameters: MutableList<FirValueParameter>,
-        originFunction: LighterASTNode
-    ): FirExpression {
-        val internalName: String = outerName.asString() + "$"
-
-        return buildFunctionCall {
-            calleeReference = buildSimpleNamedReference {
-                name = Name.identifier(internalName)
-                source = originFunction.toFirSourceElement(kind = KtFakeSourceElementKind.DuplicatedProxyExternalFunction)
-            }
-            argumentList = buildArgumentList {
-                arguments += valueParameters.map { parameter ->
-                    buildPropertyAccessExpression {
-                        calleeReference = buildSimpleNamedReference { name = parameter.name }
-                        source = originFunction.toFirSourceElement(kind = KtFakeSourceElementKind.DuplicatedProxyExternalFunction)
-                    }
-                }
-            }
-        }
     }
 
     /**

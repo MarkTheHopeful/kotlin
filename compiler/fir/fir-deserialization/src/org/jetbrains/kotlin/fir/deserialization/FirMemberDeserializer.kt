@@ -694,6 +694,7 @@ class FirMemberDeserializer(private val c: FirDeserializationContext) {
                     callableKind,
                     index,
                 )
+                argumentLabel = name
             }
         }.toList()
     }

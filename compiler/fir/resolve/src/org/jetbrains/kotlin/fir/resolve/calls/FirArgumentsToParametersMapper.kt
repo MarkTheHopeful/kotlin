@@ -318,7 +318,7 @@ private class FirCallArgumentsProcessor(
 
     private fun getParameterByName(name: Name): FirValueParameter? {
         if (nameToParameter == null) {
-            nameToParameter = parameters.associateBy { it.name }
+            nameToParameter = parameters.associateBy { it.argumentLabel }
         }
         return nameToParameter!![name]
     }

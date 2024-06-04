@@ -211,6 +211,7 @@ class FirSamResolver(
                     type = substitutedFunctionType
                 }
                 name = SAM_PARAMETER_NAME
+                argumentLabel = name
                 this.symbol = FirValueParameterSymbol(SAM_PARAMETER_NAME)
                 isCrossinline = false
                 isNoinline = false

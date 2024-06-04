@@ -464,13 +464,6 @@ open class PsiRawFirBuilder(
             }.also { it.source }
         }
 
-        private fun KtNamedFunction.buildJumperBody(): Pair<FirBlock?, FirContractDescription?> {
-            return FirSingleExpressionBlock(
-                this.generateCustomJumpCallExpression()
-                    .toReturn(baseSource = this.toFirSourceElement(kind = KtFakeSourceElementKind.DuplicatedProxyExternalFunction))
-            ) to null
-        }
-
         private fun isCallTheFirstStatement(psi: PsiElement): Boolean =
             isCallTheFirstStatement(psi, { it.elementType }, { it.allChildren.toList() })
 
@@ -672,24 +665,10 @@ open class PsiRawFirBuilder(
             defaultTypeRef: FirTypeRef?,
             functionSymbol: FirFunctionSymbol<*>,
             valueParameterDeclaration: ValueParameterDeclaration,
-            additionalAnnotations: List<FirAnnotation> = emptyList(),
-            useFirstIdentifier: Boolean = true
+            additionalAnnotations: List<FirAnnotation> = emptyList()
         ): FirValueParameter {
-//            println("Got KtParameter ${this.name}")
-//            println("It's hidden internal fields:")
-//            this.originalElement.node.children().forEach {
-//                println("$it, ${it.text}")
-//            }
-            val name = if (useFirstIdentifier || this.originalElement.node.children().count { it.elementType == IDENTIFIER } == 1) {
-                convertValueParameterName(nameAsSafeName, valueParameterDeclaration) { nameIdentifier?.node?.text }
-            } else {
-                Name.identifier(
-                    this.originalElement.node.children().filter { it.elementType == IDENTIFIER }.withIndex()
-                        .first { it.index == 1 }.value.text,
-                )
-//                convertValueParameterName(nameAsSafeName, valueParameterDeclaration) { nameIdentifier?.node?.text }
-            }
-//            val name = convertValueParameterName(nameAsSafeName, valueParameterDeclaration) { nameIdentifier?.node?.text }
+            val argumentLabel = convertValueParameterName(nameAsSafeName, valueParameterDeclaration) { nameIdentifier?.node?.text } // AL
+            val name = convertValueParameterName(labelAsSafeName, valueParameterDeclaration) { label }
 
             return buildValueParameter {
                 val parameterSource = toFirSourceElement()
@@ -698,6 +677,7 @@ open class PsiRawFirBuilder(
                 origin = FirDeclarationOrigin.Source
                 isVararg = isVarArg
                 this.name = name
+                this.argumentLabel = argumentLabel
                 symbol = FirValueParameterSymbol(name)
                 withContainerSymbol(symbol, isLocal = valueParameterDeclaration != ValueParameterDeclaration.FUNCTION) {
                     returnTypeRef = when {
@@ -1237,10 +1217,6 @@ open class PsiRawFirBuilder(
             } == 2
         }
 
-        private fun KtNamedFunction.doesContainAL(): Boolean {
-            return this.valueParameterList?.originalElement?.children?.any { doesPsiValueParameterContainAL(it) } ?: false
-        }
-
         override fun visitKtFile(file: KtFile, data: FirElement?): FirElement {
             context.packageFqName = when (mode) {
                 BodyBuildingMode.NORMAL -> file.packageFqNameByTree
@@ -1296,18 +1272,6 @@ open class PsiRawFirBuilder(
                                 }
                             }
                             is KtDestructuringDeclaration -> buildErrorTopLevelDestructuringDeclaration(declaration.toFirSourceElement())
-                            is KtNamedFunction -> {
-                                if (declaration.doesContainAL()) {
-                                    declaration.containsAL = true
-                                    declaration.generateAsExternal = false // parameter names, function name with '$', normal body
-                                    declarations += declaration.convert<FirFunction>()
-                                    declaration.containsAL = false // I'm a little bit suspicious
-                                    declaration.generateAsExternal = true // argument labels, normal function name, jumper body
-                                    declaration.convert()
-                                } else {
-                                    declaration.convert()
-                                }
-                            }
                             else -> declaration.convert()
                         }
                     }
@@ -1792,16 +1756,9 @@ open class PsiRawFirBuilder(
             val isAnonymousFunction = function.isAnonymous
             val isLocalFunction = function.isLocal
             val functionSymbol: FirFunctionSymbol<*> = if (isAnonymousFunction) {
-                if (function.containsAL) {
-                    throw RuntimeException("Argument Labels in anonymous functions are not supported yet")
-                }
                 FirAnonymousFunctionSymbol()
             } else {
-                val name = if (function.containsAL && (!function.generateAsExternal)) {
-                    Name.identifier(function.nameAsSafeName.identifier + '$')
-                } else {
-                    function.nameAsSafeName
-                }
+                val name = function.nameAsSafeName
                 FirNamedFunctionSymbol(callableIdForName(name))
             }
 
@@ -1871,8 +1828,7 @@ open class PsiRawFirBuilder(
                         valueParameters += valueParameter.toFirValueParameter(
                             null,
                             functionSymbol,
-                            if (isAnonymousFunction) ValueParameterDeclaration.LAMBDA else ValueParameterDeclaration.FUNCTION,
-                            useFirstIdentifier = (!function.containsAL) || (function.generateAsExternal)
+                            if (isAnonymousFunction) ValueParameterDeclaration.LAMBDA else ValueParameterDeclaration.FUNCTION
                         )
                     }
                     val actualTypeParameters = if (this is FirSimpleFunctionBuilder)
@@ -1882,11 +1838,7 @@ open class PsiRawFirBuilder(
                     withCapturedTypeParameters(true, functionSource, actualTypeParameters) {
                         val outerContractDescription = function.obtainContractDescription()
                         val (body, innerContractDescription) = withForcedLocalContext {
-                            if (function.generateAsExternal) {
-                                function.buildJumperBody()
-                            } else {
-                                function.buildFirBody()
-                            }
+                            function.buildFirBody()
                         }
                         this.body = body
                         val contractDescription = outerContractDescription ?: innerContractDescription

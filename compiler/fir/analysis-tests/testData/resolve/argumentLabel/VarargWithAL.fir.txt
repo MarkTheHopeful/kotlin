@@ -1,5 +1,5 @@
 FILE: VarargWithAL.kt
-    public final fun withVararg$(vararg name: R|kotlin/IntArray|): R|kotlin/Int| {
+    public final fun withVararg(vararg name: R|kotlin/IntArray|): R|kotlin/Int| {
         lvar sum: R|kotlin/Int| = Int(0)
          {
             lval <iterator>: R|kotlin/collections/IntIterator| = R|<local>/name|.R|kotlin/IntArray.iterator|()
@@ -13,8 +13,5 @@ FILE: VarargWithAL.kt
 
         }
 
-        ^withVararg$ R|<local>/sum|
-    }
-    public final fun withVararg(vararg label: R|kotlin/IntArray|): R|kotlin/Int| {
-        ^withVararg R|/withVararg$<Inapplicable(INAPPLICABLE): /withVararg$>#|(R|<local>/label|)
+        ^withVararg R|<local>/sum|
     }

@@ -454,6 +454,7 @@ class FirSignatureEnhancement(
                     isVararg = valueParameter.isVararg
                     resolvePhase = FirResolvePhase.ANALYZED_DEPENDENCIES
                     annotations += valueParameter.annotations
+                    argumentLabel = valueParameter.argumentLabel
                 }
             }
             this.valueParameters += newValueParameters

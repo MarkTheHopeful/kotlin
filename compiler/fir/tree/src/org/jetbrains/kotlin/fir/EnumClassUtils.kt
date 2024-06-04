@@ -118,6 +118,7 @@ fun FirRegularClassBuilder.generateValueOfFunction(
                 )
             }
             name = DEFAULT_VALUE_PARAMETER
+            argumentLabel = name
             this@vp.symbol = FirValueParameterSymbol(DEFAULT_VALUE_PARAMETER)
             isCrossinline = false
             isNoinline = false

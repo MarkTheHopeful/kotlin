@@ -1227,6 +1227,7 @@ fun <TBase, TSource : TBase, TParameter : TBase> FirRegularClassBuilder.createDa
                 origin = declarationOrigin
                 returnTypeRef = propertyReturnTypeRef
                 name = propertyName
+                argumentLabel = propertyName
                 symbol = FirValueParameterSymbol(propertyName)
                 defaultValue = generateComponentAccess(parameterSource, firProperty, classTypeRef, propertyReturnTypeRef)
                 isCrossinline = false

@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.KtNodeTypes;
 import org.jetbrains.kotlin.lexer.KtTokens;
+import org.jetbrains.kotlin.name.Name;
 import org.jetbrains.kotlin.psi.stubs.KotlinParameterStub;
 import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes;
 import org.jetbrains.kotlin.psi.typeRefHelpers.TypeRefHelpersKt;
@@ -253,5 +254,19 @@ public class KtParameter extends KtNamedDeclarationStub<KotlinParameterStub> imp
             owner = PsiTreeUtil.getParentOfType(this, KtExpression.class);
         }
         return new LocalSearchScope(owner != null ? owner : this);
+    }
+
+    public String getLabel() {
+        PsiElement identifier = findLastChildByType(KtTokens.IDENTIFIER);
+        if (identifier != null) {
+            String text = identifier.getText();
+            return text != null ? KtPsiUtil.unquoteIdentifier(text) : null;
+        } else {
+            return getName();
+        }
+    }
+
+    public Name getLabelAsSafeName() {
+        return KtPsiUtil.safeName(getLabel());
     }
 }

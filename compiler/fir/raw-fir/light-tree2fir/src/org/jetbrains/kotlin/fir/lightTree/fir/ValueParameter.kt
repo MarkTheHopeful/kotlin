@@ -97,6 +97,7 @@ class ValueParameter(
 
             annotations += this@ValueParameter.annotations
             annotations += additionalAnnotations
+            argumentLabel = this@ValueParameter.argumentLabel
         }
     }
 

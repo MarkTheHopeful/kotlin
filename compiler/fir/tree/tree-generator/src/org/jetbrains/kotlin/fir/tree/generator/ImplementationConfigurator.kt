@@ -608,6 +608,15 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
         }
 
         configureFieldInAllImplementations(
+            "argumentLabel",
+            implementationPredicate = { it.typeName == "FirDefaultSetterValueParameter" }
+        ) {
+            default(it) {
+                value = """Name.identifier("_")"""
+            }
+        }
+
+        configureFieldInAllImplementations(
             "typeParameters",
             implementationPredicate = { it.typeName in implementationsWithoutStatusAndTypeParameters }
         ) {

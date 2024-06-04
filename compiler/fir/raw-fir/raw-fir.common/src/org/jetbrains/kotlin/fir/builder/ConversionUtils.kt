@@ -497,6 +497,7 @@ fun <T> FirPropertyBuilder.generateAccessorsByDelegate(
                 origin = FirDeclarationOrigin.Source
                 returnTypeRef = FirImplicitTypeRefImplWithoutSource
                 name = SpecialNames.IMPLICIT_SET_PARAMETER
+                argumentLabel = name
                 symbol = FirValueParameterSymbol(this@generateAccessorsByDelegate.name)
                 isCrossinline = false
                 isNoinline = false
