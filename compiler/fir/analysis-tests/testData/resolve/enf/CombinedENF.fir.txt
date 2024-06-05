@@ -1,0 +1,16 @@
+FILE: CombinedENF.kt
+    public final inline fun withNoinline(noinline name: R|() -> kotlin/Unit|): R|kotlin/Unit| {
+        R|<local>/name|.R|SubstitutionOverride<kotlin/Function0.invoke: R|kotlin/Unit|>|()
+    }
+    public final fun usingNoinline(): R|kotlin/Unit| {
+        R|/withNoinline|(withNoinline@fun <anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+            ^@withNoinline Unit
+        }
+        )
+    }
+    public final fun usingNoinlinePositional(): R|kotlin/Unit| {
+        R|/withNoinline<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /withNoinline>#|(withNoinline@fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
+            ^@withNoinline Unit
+        }
+        )
+    }

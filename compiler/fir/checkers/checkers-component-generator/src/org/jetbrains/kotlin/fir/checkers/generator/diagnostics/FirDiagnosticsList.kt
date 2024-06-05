@@ -636,6 +636,9 @@ object DIAGNOSTICS_LIST : DiagnosticList("FirErrors") {
         }
 
         val NON_VARARG_SPREAD by error<LeafPsiElement>()
+        val POSITIONAL_USED_WITH_ENF by error<KtElement>(PositioningStrategy.VALUE_ARGUMENTS) {
+            parameter<FirValueParameterSymbol>("violatedParameter")
+        }
         val ARGUMENT_PASSED_TWICE by error<KtValueArgument>(PositioningStrategy.NAME_OF_NAMED_ARGUMENT)
         val TOO_MANY_ARGUMENTS by error<PsiElement> {
             parameter<FirCallableSymbol<*>>("function")

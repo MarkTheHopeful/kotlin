@@ -2197,6 +2197,16 @@ public class FirLightTreeDiagnosticsTestGenerated extends AbstractFirLightTreeDi
     }
 
     @Nested
+    @TestMetadata("compiler/fir/analysis-tests/testData/resolve/enf")
+    @TestDataPath("$PROJECT_ROOT")
+    public class Enf {
+      @Test
+      public void testAllFilesPresentInEnf() {
+        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/fir/analysis-tests/testData/resolve/enf"), Pattern.compile("^([^.]+)\\.kt$"), null, true);
+      }
+    }
+
+    @Nested
     @TestMetadata("compiler/fir/analysis-tests/testData/resolve/exhaustiveness")
     @TestDataPath("$PROJECT_ROOT")
     public class Exhaustiveness {

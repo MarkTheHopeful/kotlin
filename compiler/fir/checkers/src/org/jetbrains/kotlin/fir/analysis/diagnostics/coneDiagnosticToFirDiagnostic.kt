@@ -293,6 +293,11 @@ private fun mapInapplicableCandidateError(
                 rootCause.forbiddenNamedArgumentsTarget
             )
 
+            is PositionalUsageWithENF -> FirErrors.POSITIONAL_USED_WITH_ENF.createOn(
+                rootCause.argument.source,
+                rootCause.valueParameter.symbol
+            )
+
             is ArgumentTypeMismatch -> {
                 FirErrors.ARGUMENT_TYPE_MISMATCH.createOn(
                     rootCause.argument.source ?: source,

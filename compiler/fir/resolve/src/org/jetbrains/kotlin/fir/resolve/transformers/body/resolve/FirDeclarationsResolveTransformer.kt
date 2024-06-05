@@ -1214,6 +1214,7 @@ open class FirDeclarationsResolveTransformer(
                     isNoinline = false
                     isVararg = false
                     this.argumentLabel = name
+                    isENF = false
                 }
                 listOf(itParam)
             }

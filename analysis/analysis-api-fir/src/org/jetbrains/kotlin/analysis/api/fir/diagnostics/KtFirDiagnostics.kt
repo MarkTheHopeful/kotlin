@@ -1432,6 +1432,11 @@ sealed interface KtFirDiagnostic<PSI : PsiElement> : KtDiagnosticWithPsi<PSI> {
         override val diagnosticClass get() = NonVarargSpread::class
     }
 
+    interface PositionalUsedWithEnf : KtFirDiagnostic<KtElement> {
+        override val diagnosticClass get() = PositionalUsedWithEnf::class
+        val violatedParameter: KtSymbol
+    }
+
     interface ArgumentPassedTwice : KtFirDiagnostic<KtValueArgument> {
         override val diagnosticClass get() = ArgumentPassedTwice::class
     }

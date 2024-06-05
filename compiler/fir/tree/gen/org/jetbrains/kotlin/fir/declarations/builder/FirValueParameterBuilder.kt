@@ -49,6 +49,7 @@ open class FirValueParameterBuilder : FirAnnotationContainerBuilder {
     open var isCrossinline: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
     open var isNoinline: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
     open var isVararg: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
+    open var isENF: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
 
     override fun build(): FirValueParameter {
         return FirValueParameterImpl(
@@ -72,6 +73,7 @@ open class FirValueParameterBuilder : FirAnnotationContainerBuilder {
             isCrossinline,
             isNoinline,
             isVararg,
+            isENF,
         )
     }
 
@@ -111,5 +113,6 @@ inline fun buildValueParameterCopy(original: FirValueParameter, init: FirValuePa
     copyBuilder.isCrossinline = original.isCrossinline
     copyBuilder.isNoinline = original.isNoinline
     copyBuilder.isVararg = original.isVararg
+    copyBuilder.isENF = original.isENF
     return copyBuilder.apply(init).build()
 }

@@ -63,6 +63,9 @@ class FirJavaValueParameter @FirImplementationDetail constructor(
     override val isNoinline: Boolean
         get() = false
 
+    override val isENF: Boolean
+        get() = false // FIXME: Temporary solution, clarification needed
+
     override val isVal: Boolean
         get() = true
 

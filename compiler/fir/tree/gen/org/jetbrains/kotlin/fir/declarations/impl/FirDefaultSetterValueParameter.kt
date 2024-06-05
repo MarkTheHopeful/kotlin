@@ -63,6 +63,7 @@ internal class FirDefaultSetterValueParameter(
     override val name: Name = Name.identifier("value")
     override var controlFlowGraphReference: FirControlFlowGraphReference? = null
     override val argumentLabel: Name = Name.identifier("_")
+    override val isENF: Boolean = false
 
     init {
         symbol.bind(this)

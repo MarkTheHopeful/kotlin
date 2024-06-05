@@ -204,6 +204,7 @@ class LightTreeRawFirExpressionBuilder(
                         isCrossinline = false
                         isNoinline = false
                         isVararg = false
+                        isENF = false
                     }
                     addDestructuringStatements(
                         destructuringStatements,

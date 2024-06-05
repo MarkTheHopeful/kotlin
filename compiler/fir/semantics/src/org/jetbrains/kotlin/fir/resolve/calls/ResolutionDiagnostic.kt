@@ -53,6 +53,11 @@ class NamedArgumentNotAllowed(
     val forbiddenNamedArgumentsTarget: ForbiddenNamedArgumentsTarget
 ) : ResolutionDiagnostic(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR)
 
+class PositionalUsageWithENF(
+    val argument: FirExpression,
+    val valueParameter: FirValueParameter
+) : ResolutionDiagnostic(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR)
+
 class ArgumentPassedTwice(
     override val argument: FirNamedArgumentExpression,
 ) : InapplicableArgumentDiagnostic()

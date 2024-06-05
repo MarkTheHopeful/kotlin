@@ -216,6 +216,7 @@ val possibleTargetMap = mapOf(
         KotlinTarget.CLASS_ONLY
     ),
     NOINLINE_KEYWORD to EnumSet.of(KotlinTarget.VALUE_PARAMETER),
+    ENF_KEYWORD to EnumSet.of(KotlinTarget.VALUE_PARAMETER),
     TAILREC_KEYWORD to EnumSet.of(KotlinTarget.FUNCTION),
     SUSPEND_KEYWORD to EnumSet.of(
         KotlinTarget.MEMBER_FUNCTION,

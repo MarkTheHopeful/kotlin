@@ -411,6 +411,7 @@ object FirErrors {
     val VARARG_OUTSIDE_PARENTHESES: KtDiagnosticFactory0 by error0<KtElement>()
     val NAMED_ARGUMENTS_NOT_ALLOWED: KtDiagnosticFactory1<ForbiddenNamedArgumentsTarget> by error1<KtValueArgument, ForbiddenNamedArgumentsTarget>(SourceElementPositioningStrategies.NAME_OF_NAMED_ARGUMENT)
     val NON_VARARG_SPREAD: KtDiagnosticFactory0 by error0<LeafPsiElement>()
+    val POSITIONAL_USED_WITH_ENF: KtDiagnosticFactory1<FirValueParameterSymbol> by error1<KtElement, FirValueParameterSymbol>(SourceElementPositioningStrategies.VALUE_ARGUMENTS)
     val ARGUMENT_PASSED_TWICE: KtDiagnosticFactory0 by error0<KtValueArgument>(SourceElementPositioningStrategies.NAME_OF_NAMED_ARGUMENT)
     val TOO_MANY_ARGUMENTS: KtDiagnosticFactory1<FirCallableSymbol<*>> by error1<PsiElement, FirCallableSymbol<*>>()
     val NO_VALUE_FOR_PARAMETER: KtDiagnosticFactory1<FirValueParameterSymbol> by error1<KtElement, FirValueParameterSymbol>(SourceElementPositioningStrategies.VALUE_ARGUMENTS)
