@@ -551,7 +551,12 @@ internal fun FirVariable.getDestructuredParameter(): FirValueParameterSymbol? {
 }
 
 /** Checks for redeclarations of value and type parameters, and local variables. */
-fun checkForLocalRedeclarations(elements: List<FirElement>, context: CheckerContext, reporter: DiagnosticReporter) {
+fun checkForLocalRedeclarations(
+    elements: List<FirElement>,
+    context: CheckerContext,
+    reporter: DiagnosticReporter,
+    checkArgumentLabels: Boolean = false
+) {
     if (elements.size <= 1) return
 
     val multimap = ListMultimap<Name, FirBasedSymbol<*>>()
@@ -560,6 +565,10 @@ fun checkForLocalRedeclarations(elements: List<FirElement>, context: CheckerCont
         val name: Name?
         val symbol: FirBasedSymbol<*>?
         when (element) {
+            is FirValueParameter -> {
+                symbol = element.symbol
+                name = if (checkArgumentLabels) element.argumentLabel else element.name
+            }
             is FirVariable -> {
                 symbol = element.symbol
                 name = element.name
@@ -587,5 +596,8 @@ fun checkForLocalRedeclarations(elements: List<FirElement>, context: CheckerCont
                 reporter.reportOn(conflictingElement.source, FirErrors.REDECLARATION, conflictingElements, context)
             }
         }
+    }
+    if (elements[0] is FirValueParameter && !checkArgumentLabels) {
+        checkForLocalRedeclarations(elements, context, reporter, true)
     }
 }

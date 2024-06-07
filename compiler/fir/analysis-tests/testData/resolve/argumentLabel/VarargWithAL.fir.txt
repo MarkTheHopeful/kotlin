@@ -1,12 +1,12 @@
 FILE: VarargWithAL.kt
-    public final fun withVararg(vararg name: R|kotlin/IntArray|): R|kotlin/Int| {
-        lvar sum: R|kotlin/Int| = Int(0)
+    public final fun withVararg(vararg toSum: R|kotlin/IntArray|, initial: R|kotlin/Int|, mult: R|kotlin/Int|): R|kotlin/Int| {
+        lvar sum: R|kotlin/Int| = R|<local>/initial|
          {
-            lval <iterator>: R|kotlin/collections/IntIterator| = R|<local>/name|.R|kotlin/IntArray.iterator|()
+            lval <iterator>: R|kotlin/collections/IntIterator| = R|<local>/toSum|.R|kotlin/IntArray.iterator|()
             while(R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/IntIterator.hasNext: R|kotlin/Boolean|>|()) {
                 lval item: R|kotlin/Int| = R|<local>/<iterator>|.R|kotlin/collections/IntIterator.next|()
                  {
-                    R|<local>/sum| = R|<local>/sum|.R|kotlin/Int.plus|(R|<local>/item|)
+                    R|<local>/sum| = R|<local>/sum|.R|kotlin/Int.plus|(R|<local>/item|.R|kotlin/Int.times|(R|<local>/mult|))
                 }
 
             }
@@ -14,4 +14,7 @@ FILE: VarargWithAL.kt
         }
 
         ^withVararg R|<local>/sum|
+    }
+    public final fun caller(): R|kotlin/Unit| {
+        R|/withVararg|(vararg(Int(1), Int(2), Int(3), Int(4)), Int(3), Int(10))
     }

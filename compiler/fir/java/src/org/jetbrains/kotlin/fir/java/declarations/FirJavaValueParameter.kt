@@ -64,7 +64,7 @@ class FirJavaValueParameter @FirImplementationDetail constructor(
         get() = false
 
     override val isENF: Boolean
-        get() = false // FIXME: Temporary solution, clarification needed
+        get() = false // Java cannot have Enforced Named Form, as there is no Named Form in Java at all
 
     override val isVal: Boolean
         get() = true
