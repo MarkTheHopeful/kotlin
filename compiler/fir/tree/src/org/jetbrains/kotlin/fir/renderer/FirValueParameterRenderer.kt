@@ -33,7 +33,11 @@ open class FirValueParameterRenderer {
         annotationRenderer?.render(valueParameter)
         modifierRenderer?.renderModifiers(valueParameter)
         if (valueParameter.name != SpecialNames.NO_NAME_PROVIDED) {
-            printer.print(valueParameter.name.toString() + ": ")
+            if (valueParameter.name != valueParameter.argumentLabel) {
+                printer.print(valueParameter.argumentLabel.toString() + " " + valueParameter.name.toString() + ": ")
+            } else {
+                printer.print(valueParameter.name.toString() + ": ")
+            }
         }
 
         renderParameterType(valueParameter)
