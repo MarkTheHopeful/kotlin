@@ -518,6 +518,7 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OVERRIDING_FINAL_
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.OVERRIDING_FINAL_MEMBER_BY_DELEGATION
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.PACKAGE_CANNOT_BE_IMPORTED
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.PACKAGE_OR_CLASSIFIER_REDECLARATION
+import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.PARAMETER_NAME_USED_INSTEAD_OF_LABEL
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.PLATFORM_CLASS_MAPPED_TO_KOTLIN
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.PLUGIN_AMBIGUOUS_INTERCEPTED_SYMBOL
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.POTENTIALLY_NON_REPORTED_ANNOTATION
@@ -1264,6 +1265,12 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(TOO_MANY_ARGUMENTS, "Too many arguments for ''{0}''.", FQ_NAMES_IN_TYPES)
         map.put(ARGUMENT_PASSED_TWICE, "Argument already passed for this parameter.")
         map.put(NO_VALUE_FOR_PARAMETER, "No value passed for parameter ''{0}''.", DECLARATION_NAME)
+        map.put(
+            PARAMETER_NAME_USED_INSTEAD_OF_LABEL,
+            "Used parameter name (internal) instead of argument label (external) when passing named argument. Replace ''{0}'' with ''{1}''.",
+            TO_STRING,
+            DECLARATION_NAME
+        )
         map.put(NAMED_PARAMETER_NOT_FOUND, "No parameter with name ''{0}'' found.", TO_STRING)
         map.put(NAME_FOR_AMBIGUOUS_PARAMETER, "Named argument is prohibited for parameter with an ambiguous name.")
 

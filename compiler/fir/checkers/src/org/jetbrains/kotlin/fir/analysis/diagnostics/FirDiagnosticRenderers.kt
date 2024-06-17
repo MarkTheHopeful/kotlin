@@ -102,6 +102,7 @@ object FirDiagnosticRenderers {
 
     val DECLARATION_NAME = Renderer { symbol: FirBasedSymbol<*> ->
         val name = when (symbol) {
+            is FirValueParameterSymbol -> symbol.argumentLabel
             is FirCallableSymbol<*> -> symbol.name
             is FirClassLikeSymbol<*> -> symbol.classId.shortClassName
             else -> return@Renderer "???"

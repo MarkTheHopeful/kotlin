@@ -350,6 +350,12 @@ private fun mapInapplicableCandidateError(
                 rootCause.valueParameter.symbol
             )
 
+            is ParameterNameUsedInsteadOfArgumentLabel -> FirErrors.PARAMETER_NAME_USED_INSTEAD_OF_LABEL.createOn(
+                qualifiedAccessSource ?: source,
+                rootCause.argument.name.asString(),
+                rootCause.valueParameter.symbol
+            )
+
             is NameNotFound -> FirErrors.NAMED_PARAMETER_NOT_FOUND.createOn(
                 rootCause.argument.source ?: source,
                 rootCause.argument.name.asString()

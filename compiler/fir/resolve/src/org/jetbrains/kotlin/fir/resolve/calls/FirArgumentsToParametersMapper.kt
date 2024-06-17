@@ -115,6 +115,7 @@ private class FirCallArgumentsProcessor(
     private var state = State.POSITION_ARGUMENTS
     private var currentPositionedParameterIndex = 0
     private var varargArguments: MutableList<FirExpression>? = null
+    private var labelToParameter: Map<Name, FirValueParameter>? = null
     private var nameToParameter: Map<Name, FirValueParameter>? = null
     private var namedDynamicArgumentsNamesImpl: MutableSet<Name>? = null
     private val namedDynamicArgumentsNames: MutableSet<Name>
@@ -316,15 +317,22 @@ private class FirCallArgumentsProcessor(
         varargArguments!!.add(argument)
     }
 
+    private fun getParameterByLabel(label: Name): FirValueParameter? {
+        if (labelToParameter == null) {
+            labelToParameter = parameters.associateBy { it.argumentLabel }
+        }
+        return labelToParameter!![label]
+    }
+
     private fun getParameterByName(name: Name): FirValueParameter? {
         if (nameToParameter == null) {
-            nameToParameter = parameters.associateBy { it.argumentLabel }
+            nameToParameter = parameters.associateBy { it.name }
         }
         return nameToParameter!![name]
     }
 
     private fun findParameterByName(argument: FirNamedArgumentExpression): FirValueParameter? {
-        var parameter = getParameterByName(argument.name)
+        var parameter = getParameterByLabel(argument.name)
 
         val symbol = function.symbol as? FirNamedFunctionSymbol
         var matchedIndex = -1
@@ -342,7 +350,23 @@ private class FirCallArgumentsProcessor(
             return ProcessorAction.NEXT
         }
 
+        fun findAndReportValueParameterWithNameInsteadOfLabel(): Boolean {
+            val sameNameParameter = getParameterByName(argument.name)
+            if (sameNameParameter != null) {
+                addDiagnostic(
+                    ParameterNameUsedInsteadOfArgumentLabel(argument, sameNameParameter)
+                )
+                return true
+            }
+            return false
+        }
+
         if (parameter == null) {
+            if (symbol != null) {
+                if (findAndReportValueParameterWithNameInsteadOfLabel()) {
+                    return null
+                }
+            }
             if (symbol != null && function.isSubstitutionOrIntersectionOverride) {
                 var allowedParameters: List<FirValueParameterSymbol>? = null
                 (originScope as? FirTypeScope)?.processOverriddenFunctions(symbol) {

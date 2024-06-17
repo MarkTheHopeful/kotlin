@@ -69,6 +69,11 @@ class NoValueForParameter(
     val function: FirFunction
 ) : ResolutionDiagnostic(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR)
 
+class ParameterNameUsedInsteadOfArgumentLabel(
+    val argument: FirNamedArgumentExpression,
+    val valueParameter: FirValueParameter
+) : ResolutionDiagnostic(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR)
+
 class NameNotFound(
     val argument: FirNamedArgumentExpression,
     val function: FirFunction

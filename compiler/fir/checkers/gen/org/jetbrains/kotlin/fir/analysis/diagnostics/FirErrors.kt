@@ -414,6 +414,7 @@ object FirErrors {
     val ARGUMENT_PASSED_TWICE: KtDiagnosticFactory0 by error0<KtValueArgument>(SourceElementPositioningStrategies.NAME_OF_NAMED_ARGUMENT)
     val TOO_MANY_ARGUMENTS: KtDiagnosticFactory1<FirCallableSymbol<*>> by error1<PsiElement, FirCallableSymbol<*>>()
     val NO_VALUE_FOR_PARAMETER: KtDiagnosticFactory1<FirValueParameterSymbol> by error1<KtElement, FirValueParameterSymbol>(SourceElementPositioningStrategies.VALUE_ARGUMENTS)
+    val PARAMETER_NAME_USED_INSTEAD_OF_LABEL: KtDiagnosticFactory2<String, FirValueParameterSymbol> by error2<KtElement, String, FirValueParameterSymbol>(SourceElementPositioningStrategies.VALUE_ARGUMENTS)
     val NAMED_PARAMETER_NOT_FOUND: KtDiagnosticFactory1<String> by error1<KtValueArgument, String>(SourceElementPositioningStrategies.NAME_OF_NAMED_ARGUMENT)
     val NAME_FOR_AMBIGUOUS_PARAMETER: KtDiagnosticFactory0 by error0<KtValueArgument>(SourceElementPositioningStrategies.NAME_OF_NAMED_ARGUMENT)
     val ASSIGNMENT_TYPE_MISMATCH: KtDiagnosticFactory3<ConeKotlinType, ConeKotlinType, Boolean> by error3<KtExpression, ConeKotlinType, ConeKotlinType, Boolean>()

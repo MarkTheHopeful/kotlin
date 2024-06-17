@@ -133,6 +133,9 @@ class FirEnumEntrySymbol(callableId: CallableId) : FirVariableSymbol<FirEnumEntr
 }
 
 class FirValueParameterSymbol(name: Name) : FirVariableSymbol<FirValueParameter>(CallableId(name)), ValueParameterSymbolMarker {
+    val argumentLabel: Name
+        get() = fir.argumentLabel
+
     val hasDefaultValue: Boolean
         get() = fir.defaultValue != null
 
