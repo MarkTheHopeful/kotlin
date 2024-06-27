@@ -2019,6 +2019,14 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
             token,
         )
     }
+    add(FirErrors.PARAMETER_NAME_USED_INSTEAD_OF_LABEL) { firDiagnostic ->
+        ParameterNameUsedInsteadOfLabelImpl(
+            firDiagnostic.a,
+            firSymbolBuilder.buildSymbol(firDiagnostic.b),
+            firDiagnostic as KtPsiDiagnostic,
+            token,
+        )
+    }
     add(FirErrors.NAMED_PARAMETER_NOT_FOUND) { firDiagnostic ->
         NamedParameterNotFoundImpl(
             firDiagnostic.a,

@@ -644,6 +644,11 @@ object DIAGNOSTICS_LIST : DiagnosticList("FirErrors") {
             parameter<FirValueParameterSymbol>("violatedParameter")
         }
 
+        val PARAMETER_NAME_USED_INSTEAD_OF_LABEL by error<KtElement>(PositioningStrategy.VALUE_ARGUMENTS) {
+            parameter<String>("parameterName")
+            parameter<FirValueParameterSymbol>("argument")
+        }
+
         val NAMED_PARAMETER_NOT_FOUND by error<KtValueArgument>(PositioningStrategy.NAME_OF_NAMED_ARGUMENT) {
             parameter<String>("name")
         }

@@ -1446,6 +1446,12 @@ sealed interface KtFirDiagnostic<PSI : PsiElement> : KtDiagnosticWithPsi<PSI> {
         val violatedParameter: KtSymbol
     }
 
+    interface ParameterNameUsedInsteadOfLabel : KtFirDiagnostic<KtElement> {
+        override val diagnosticClass get() = ParameterNameUsedInsteadOfLabel::class
+        val parameterName: String
+        val argument: KtSymbol
+    }
+
     interface NamedParameterNotFound : KtFirDiagnostic<KtValueArgument> {
         override val diagnosticClass get() = NamedParameterNotFound::class
         val name: String

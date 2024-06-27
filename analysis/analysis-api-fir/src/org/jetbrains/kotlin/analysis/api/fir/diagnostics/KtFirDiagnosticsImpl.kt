@@ -1735,6 +1735,13 @@ internal class NoValueForParameterImpl(
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NoValueForParameter
 
+internal class ParameterNameUsedInsteadOfLabelImpl(
+    override val parameterName: String,
+    override val argument: KtSymbol,
+    firDiagnostic: KtPsiDiagnostic,
+    token: KtLifetimeToken,
+) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ParameterNameUsedInsteadOfLabel
+
 internal class NamedParameterNotFoundImpl(
     override val name: String,
     firDiagnostic: KtPsiDiagnostic,
