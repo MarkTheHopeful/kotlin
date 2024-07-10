@@ -71,6 +71,7 @@ public class Flags {
     public static final BooleanFlagField DECLARES_DEFAULT_VALUE = FlagField.booleanAfter(HAS_ANNOTATIONS);
     public static final BooleanFlagField IS_CROSSINLINE = FlagField.booleanAfter(DECLARES_DEFAULT_VALUE);
     public static final BooleanFlagField IS_NOINLINE = FlagField.booleanAfter(IS_CROSSINLINE);
+    public static final BooleanFlagField IS_ENF = FlagField.booleanAfter(IS_NOINLINE);
 
     // Accessors
 
@@ -217,12 +218,14 @@ public class Flags {
             boolean hasAnnotations,
             boolean declaresDefaultValue,
             boolean isCrossinline,
-            boolean isNoinline
+            boolean isNoinline,
+            boolean isEnf
     ) {
         return HAS_ANNOTATIONS.toFlags(hasAnnotations)
                | DECLARES_DEFAULT_VALUE.toFlags(declaresDefaultValue)
                | IS_CROSSINLINE.toFlags(isCrossinline)
                | IS_NOINLINE.toFlags(isNoinline)
+               | IS_ENF.toFlags(isEnf)
                 ;
     }
 

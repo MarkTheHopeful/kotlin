@@ -25,10 +25,7 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrSetFieldImpl
 import org.jetbrains.kotlin.ir.symbols.impl.IrValueParameterSymbolImpl
 import org.jetbrains.kotlin.ir.symbols.impl.IrVariableSymbolImpl
 import org.jetbrains.kotlin.ir.types.IrSimpleType
-import org.jetbrains.kotlin.ir.util.indexOrMinusOne
-import org.jetbrains.kotlin.ir.util.isCrossinline
-import org.jetbrains.kotlin.ir.util.isNoinline
-import org.jetbrains.kotlin.ir.util.varargElementType
+import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.name.SpecialNames
 import org.jetbrains.kotlin.psi.KtDestructuringDeclaration
 import org.jetbrains.kotlin.psi.KtScript
@@ -73,6 +70,7 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
                         varargElementType = varargElementType,
                         isCrossinline = descriptor.isCrossinline,
                         isNoinline = descriptor.isNoinline,
+                        isEnf = descriptor.isEnf,
                         isHidden = false,
                     )
                 }.also { it.parent = irScript }
@@ -109,6 +107,7 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
                     varargElementType = valueParameterDescriptor.varargElementType?.toIrType(),
                     isCrossinline = valueParameterDescriptor.isCrossinline,
                     isNoinline = valueParameterDescriptor.isNoinline,
+                    isEnf = valueParameterDescriptor.isEnf,
                     isHidden = false
                 ).also { it.parent = irScript }
             }
@@ -153,6 +152,7 @@ internal class ScriptGenerator(declarationGenerator: DeclarationGenerator) : Dec
                         varargElementType = null,
                         isCrossinline = false,
                         isNoinline = false,
+                        isEnf = false,
                         isHidden = false,
                     ).also { it.parent = irScript }
                 }

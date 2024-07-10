@@ -882,6 +882,7 @@ public abstract class FunctionDescriptorImpl extends DeclarationDescriptorNonRoo
                             unsubstitutedValueParameter.declaresDefaultValue(),
                             unsubstitutedValueParameter.isCrossinline(),
                             unsubstitutedValueParameter.isNoinline(),
+                            unsubstitutedValueParameter.isEnf(),
                             substituteVarargElementType,
                             preserveSourceElement ? unsubstitutedValueParameter.getSource() : SourceElement.NO_SOURCE,
                             destructuringVariablesAction

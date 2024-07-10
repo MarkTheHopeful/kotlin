@@ -176,6 +176,7 @@ class DynamicCallableDescriptors(private val storageManager: StorageManager, bui
                     /* declaresDefaultValue = */ false,
                     /* isCrossinline = */ false,
                     /* isNoinline = */ false,
+                    /* isEnf = */ false,
                     varargElementType,
                     SourceElement.NO_SOURCE
                 )

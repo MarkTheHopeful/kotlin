@@ -89,6 +89,7 @@ public class IrFlags extends Flags {
             boolean declaresDefaultValue,
             boolean isCrossinline,
             boolean isNoinline,
+            boolean isEnf,
             boolean isHidden,
             boolean isAssignable
     ) {
@@ -96,6 +97,7 @@ public class IrFlags extends Flags {
                | DECLARES_DEFAULT_VALUE.toFlags(declaresDefaultValue)
                | IS_CROSSINLINE.toFlags(isCrossinline)
                | IS_NOINLINE.toFlags(isNoinline)
+               | IS_ENF.toFlags(isEnf)
                | IS_HIDDEN.toFlags(isHidden)
                | IS_ASSIGNABLE.toFlags(isAssignable)
                 ;

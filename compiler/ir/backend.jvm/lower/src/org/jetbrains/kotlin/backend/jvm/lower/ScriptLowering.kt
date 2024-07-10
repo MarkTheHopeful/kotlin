@@ -341,6 +341,7 @@ internal class ScriptsToClassesLowering(val context: JvmBackendContext) : Module
                             varargElementType = null,
                             isCrossinline = false,
                             isNoinline = false,
+                            isEnf = false,
                             isHidden = false,
                         ).also { it.parent = irScript }
                     },
@@ -540,7 +541,7 @@ private fun makeImplicitReceiversFieldsWithParameters(irScriptClass: IrClass, ty
             val param = irScriptClass.factory.createValueParameter(
                 UNDEFINED_OFFSET, UNDEFINED_OFFSET, IrDeclarationOrigin.SCRIPT_IMPLICIT_RECEIVER, name, type, isAssignable = false,
                 IrValueParameterSymbolImpl(), UNDEFINED_PARAMETER_INDEX, varargElementType = null,
-                isCrossinline = false, isNoinline = false, isHidden = false,
+                isCrossinline = false, isNoinline = false, isEnf = false, isHidden = false,
             )
             param.parent = irScriptClass
             add(createField(name, type) to param)
@@ -1122,6 +1123,7 @@ private fun IrDeclarationParent.createThisReceiverParameter(
         varargElementType = null,
         isCrossinline = false,
         isNoinline = false,
+        isEnf = false,
         isHidden = false,
     ).also {
         it.parent = this

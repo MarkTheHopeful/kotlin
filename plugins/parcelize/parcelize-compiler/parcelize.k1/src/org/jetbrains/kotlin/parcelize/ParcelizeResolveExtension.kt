@@ -90,6 +90,7 @@ open class ParcelizeResolveExtension(private val parcelizeAnnotations: List<FqNa
                 declaresDefaultValue = false,
                 isCrossinline = false,
                 isNoinline = false,
+                isEnf = false,
                 varargElementType = null,
                 source = this.source
             )

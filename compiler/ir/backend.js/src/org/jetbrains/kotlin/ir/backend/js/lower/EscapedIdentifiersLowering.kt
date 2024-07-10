@@ -67,6 +67,7 @@ class EscapedIdentifiersLowering(context: JsIrBackendContext) : BodyLoweringPass
                 varargElementType = null,
                 isCrossinline = false,
                 isNoinline = false,
+                isEnf = false,
                 isHidden = false,
             ).also { it.parent = this }
 

@@ -17,6 +17,7 @@ class IrValueParameterBuilder : IrDeclarationBuilder() {
     var varargElementType: IrType? = null
     var isCrossInline = false
     var isNoinline = false
+    var isEnf = false
     var isHidden = false
     var isAssignable = false
 
@@ -28,6 +29,7 @@ class IrValueParameterBuilder : IrDeclarationBuilder() {
         varargElementType = from.varargElementType
         isCrossInline = from.isCrossinline
         isNoinline = from.isNoinline
+        isEnf = from.isEnf
         isHidden = from.isHidden
         isAssignable = from.isAssignable
     }

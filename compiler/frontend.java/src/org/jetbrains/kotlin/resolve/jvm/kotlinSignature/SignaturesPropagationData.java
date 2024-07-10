@@ -169,6 +169,7 @@ public class SignaturesPropagationData {
                         originalParam.declaresDefaultValue(),
                         originalParam.isCrossinline(),
                         originalParam.isNoinline(),
+                        originalParam.isEnf(),
                         varargCheckResult.isVararg ? DescriptorUtilsKt.getBuiltIns(originalParam).getArrayElementType(altType) : null,
                         SourceElement.NO_SOURCE
                 ));

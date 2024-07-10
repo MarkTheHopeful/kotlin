@@ -384,6 +384,7 @@ open class DescriptorSymbolTableExtension(table: SymbolTable) : SymbolTableExten
                 varargElementType = varargElementType,
                 isCrossinline = descriptor.isCrossinline,
                 isNoinline = descriptor.isNoinline,
+                isEnf = descriptor.isEnf,
                 isHidden = false,
             )
         }

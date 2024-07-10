@@ -238,7 +238,7 @@ class Fir2IrVisitor(
                             startOffset, endOffset, origin, name, receiver.typeRef.toIrType(c), isAssignable = false,
                             IrValueParameterSymbolImpl(),
                             if (isSelf) UNDEFINED_PARAMETER_INDEX else index,
-                            varargElementType = null, isCrossinline = false, isNoinline = false, isHidden = false
+                            varargElementType = null, isCrossinline = false, isNoinline = false, isEnf = false, isHidden = false
                         ).also {
                             it.parent = irScript
                         }

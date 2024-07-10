@@ -335,7 +335,7 @@ class FunctionDescriptorResolver(
                 val it = ValueParameterDescriptorImpl(
                     functionDescriptor, null, 0, Annotations.EMPTY, StandardNames.IMPLICIT_LAMBDA_PARAMETER_NAME,
                     expectedParameterTypes!!.single(), valueParameterDescriptor.declaresDefaultValue(),
-                    valueParameterDescriptor.isCrossinline, valueParameterDescriptor.isNoinline,
+                    valueParameterDescriptor.isCrossinline, valueParameterDescriptor.isNoinline, valueParameterDescriptor.isEnf,
                     valueParameterDescriptor.varargElementType, SourceElement.NO_SOURCE
                 )
                 trace.record(BindingContext.AUTO_CREATED_IT, it)

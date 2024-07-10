@@ -257,6 +257,7 @@ internal class AdapterGenerator(
             varargElementType = null,
             isCrossinline = false,
             isNoinline = false,
+            isEnf = false,
             isHidden = false
         ).also { irAdapterValueParameter ->
             irAdapterValueParameter.parent = adapterFunction

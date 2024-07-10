@@ -54,6 +54,7 @@ interface IrLazyFunctionBase : IrLazyDeclarationBase, IrTypeParametersContainer 
                     varargElementType = null,
                     isCrossinline = false,
                     isNoinline = false,
+                    isEnf = false,
                     isHidden = false,
                 ).apply { parent = this@IrLazyFunctionBase }
             }

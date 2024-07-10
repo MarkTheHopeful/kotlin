@@ -384,6 +384,7 @@ public class DescriptorResolver {
                 valueParameter.hasDefaultValue(),
                 valueParameter.hasModifier(CROSSINLINE_KEYWORD),
                 valueParameter.hasModifier(NOINLINE_KEYWORD),
+                valueParameter.hasModifier(ENF_KEYWORD),
                 varargElementType,
                 KotlinSourceElementKt.toSourceElement(valueParameter),
                 destructuringVariables

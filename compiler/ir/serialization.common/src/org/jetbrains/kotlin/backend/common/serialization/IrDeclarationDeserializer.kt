@@ -341,6 +341,7 @@ class IrDeclarationDeserializer(
                 varargElementType = if (proto.hasVarargElementType()) deserializeIrType(proto.varargElementType) else null,
                 isCrossinline = flags.isCrossInline,
                 isNoinline = flags.isNoInline,
+                isEnf = flags.isEnf,
                 isHidden = flags.isHidden,
             ).apply {
                 if (proto.hasDefaultValue())

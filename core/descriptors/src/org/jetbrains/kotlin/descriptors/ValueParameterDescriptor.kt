@@ -56,5 +56,7 @@ interface ValueParameterDescriptor : VariableDescriptor, ParameterDescriptor, Va
 
     val isNoinline: Boolean
 
+    val isEnf: Boolean
+
     override fun isLateInit(): Boolean = false
 }

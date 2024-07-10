@@ -102,7 +102,8 @@ class Fir2IrLazyPropertyAccessor(
                             firValueParameter = valueParameter,
                             name = valueParameter?.name,
                             isCrossinline = valueParameter?.isCrossinline == true,
-                            isNoinline = valueParameter?.isNoinline == true
+                            isNoinline = valueParameter?.isNoinline == true,
+                            isEnf = valueParameter?.isENF == true
                         )
                     )
                 }

@@ -316,7 +316,7 @@ class LazyScriptDescriptor(
                 Annotations.EMPTY,
                 param.first,
                 param.second,
-                declaresDefaultValue = false, isCrossinline = false, isNoinline = false, varargElementType = null,
+                declaresDefaultValue = false, isCrossinline = false, isNoinline = false, isEnf = false, varargElementType = null,
                 source = SourceElement.NO_SOURCE
             )
 

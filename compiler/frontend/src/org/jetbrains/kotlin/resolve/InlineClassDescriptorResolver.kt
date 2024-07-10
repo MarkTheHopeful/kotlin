@@ -123,6 +123,6 @@ object InlineClassDescriptorResolver {
         functionDescriptor: FunctionDescriptor, type: KotlinType, name: Name, index: Int
     ): ValueParameterDescriptorImpl =
         ValueParameterDescriptorImpl(
-            functionDescriptor, null, index, Annotations.EMPTY, name, type, false, false, false, null, SourceElement.NO_SOURCE
+            functionDescriptor, null, index, Annotations.EMPTY, name, type, false, false, false, false, null, SourceElement.NO_SOURCE
         )
 }

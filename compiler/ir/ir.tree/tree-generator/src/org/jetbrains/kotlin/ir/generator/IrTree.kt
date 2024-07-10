@@ -208,6 +208,7 @@ object IrTree : AbstractTreeBuilder() {
         +field("varargElementType", irTypeType, nullable = true)
         +field("isCrossinline", boolean)
         +field("isNoinline", boolean)
+        +field("isEnf", boolean)
         +field("isHidden", boolean) {
             additionalImports.add(idSignatureType)
             kDoc = """

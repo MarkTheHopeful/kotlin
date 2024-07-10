@@ -229,7 +229,7 @@ fun <D : FunctionDescriptor> getOrCreateJvmSuspendFunctionView(
         else
             function.getContinuationParameterTypeOfSuspendFunction(),
         declaresDefaultValue = false, isCrossinline = false,
-        isNoinline = false, varargElementType = null,
+        isNoinline = false, isEnf = false, varargElementType = null,
         source = SourceElement.NO_SOURCE
     )
 

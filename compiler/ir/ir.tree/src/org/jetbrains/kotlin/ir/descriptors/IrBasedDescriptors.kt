@@ -137,6 +137,7 @@ open class IrBasedValueParameterDescriptor(owner: IrValueParameter) : ValueParam
     override val index get() = owner.index
     override val isCrossinline get() = owner.isCrossinline
     override val isNoinline get() = owner.isNoinline
+    override val isEnf get() = owner.isEnf
     override val varargElementType get() = owner.varargElementType?.toIrBasedKotlinType()
     override fun isConst() = false
     override fun isVar() = false

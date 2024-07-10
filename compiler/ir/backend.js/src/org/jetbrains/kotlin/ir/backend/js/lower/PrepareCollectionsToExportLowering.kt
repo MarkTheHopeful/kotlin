@@ -127,6 +127,7 @@ class PrepareCollectionsToExportLowering(private val context: JsIrBackendContext
                 varargElementType = null,
                 isCrossinline = false,
                 isNoinline = false,
+                isEnf = false,
                 isHidden = false,
             ).also { field ->
                 field.parent = companionObject

@@ -587,6 +587,7 @@ class Fir2IrCallableDeclarationsGenerator(private val c: Fir2IrComponents) : Fir
         name: Name? = null,
         isCrossinline: Boolean = false,
         isNoinline: Boolean = false,
+        isEnf: Boolean = false,
     ): IrValueParameter {
         return irFactory.createValueParameter(
             startOffset = startOffset,
@@ -600,6 +601,7 @@ class Fir2IrCallableDeclarationsGenerator(private val c: Fir2IrComponents) : Fir
             varargElementType = null,
             isCrossinline = isCrossinline,
             isNoinline = isNoinline,
+            isEnf = isEnf,
             isHidden = false,
         ).apply {
             this.parent = parent
@@ -639,6 +641,7 @@ class Fir2IrCallableDeclarationsGenerator(private val c: Fir2IrComponents) : Fir
                 varargElementType = null,
                 isCrossinline = false,
                 isNoinline = false,
+                isEnf = false,
                 isHidden = false,
             )
         }
@@ -761,6 +764,7 @@ class Fir2IrCallableDeclarationsGenerator(private val c: Fir2IrComponents) : Fir
                 varargElementType = valueParameter.varargElementType?.toIrType(c, typeOrigin),
                 isCrossinline = valueParameter.isCrossinline,
                 isNoinline = valueParameter.isNoinline,
+                isEnf = valueParameter.isENF,
                 isHidden = false,
             ).apply {
                 val defaultValue = valueParameter.defaultValue

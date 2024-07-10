@@ -460,6 +460,7 @@ private fun StatementGenerator.createFunctionForSuspendConversion(
             varargElementType = null,
             isCrossinline = false,
             isNoinline = false,
+            isEnf = false,
             isHidden = false,
         )
 

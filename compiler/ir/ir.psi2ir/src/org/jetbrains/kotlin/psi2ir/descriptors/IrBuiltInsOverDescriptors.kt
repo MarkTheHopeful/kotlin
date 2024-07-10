@@ -154,6 +154,7 @@ class IrBuiltInsOverDescriptors(
                     varargElementType = null,
                     isCrossinline = false,
                     isNoinline = false,
+                    isEnf = false,
                     isHidden = false
                 ).apply {
                     parent = operator
@@ -200,7 +201,7 @@ class IrBuiltInsOverDescriptors(
 
             valueParameterDescriptor = ValueParameterDescriptorImpl(
                 this, null, 0, Annotations.EMPTY, Name.identifier("arg0"), valueKotlinType,
-                declaresDefaultValue = false, isCrossinline = false, isNoinline = false, varargElementType = null,
+                declaresDefaultValue = false, isCrossinline = false, isNoinline = false, isEnf = false, varargElementType = null,
                 source = SourceElement.NO_SOURCE
             )
 
@@ -269,6 +270,7 @@ class IrBuiltInsOverDescriptors(
                     varargElementType = null,
                     isCrossinline = false,
                     isNoinline = false,
+                    isEnf = false,
                     isHidden = false,
                 )
 

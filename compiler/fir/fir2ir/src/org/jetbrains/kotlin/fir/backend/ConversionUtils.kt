@@ -591,6 +591,7 @@ internal fun IrDeclarationParent.declareThisReceiverParameter(
         varargElementType = null,
         isCrossinline = false,
         isNoinline = false,
+        isEnf = false,
         isHidden = false,
     ).apply {
         this.parent = this@declareThisReceiverParameter

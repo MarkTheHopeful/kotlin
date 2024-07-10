@@ -42,6 +42,7 @@ interface IrLazyDeclarationBase : IrDeclaration {
             varargElementType = null,
             isCrossinline = false,
             isNoinline = false,
+            isEnf = false,
             isHidden = false,
         )
 

@@ -382,6 +382,7 @@ class IrFactoryImplForJsIC(override val stageController: StageController) : Abst
         varargElementType: IrType?,
         isCrossinline: Boolean,
         isNoinline: Boolean,
+        isEnf: Boolean,
         isHidden: Boolean
     ): IrValueParameter {
         return super.createValueParameter(
@@ -396,6 +397,7 @@ class IrFactoryImplForJsIC(override val stageController: StageController) : Abst
             varargElementType,
             isCrossinline,
             isNoinline,
+            isEnf,
             isHidden,
         ).register()
     }

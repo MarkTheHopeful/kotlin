@@ -33,6 +33,7 @@ open class ValueParameterDescriptorImpl(
         private val declaresDefaultValue: Boolean,
         override val isCrossinline: Boolean,
         override val isNoinline: Boolean,
+        override val isEnf: Boolean,
         override val varargElementType: KotlinType?,
         source: SourceElement
 ) : VariableDescriptorImpl(containingDeclaration, annotations, name, outType, source), ValueParameterDescriptor {
@@ -51,15 +52,15 @@ open class ValueParameterDescriptorImpl(
                                                 outType: KotlinType,
                                                 declaresDefaultValue: Boolean,
                                                 isCrossinline: Boolean,
-                                                isNoinline: Boolean, varargElementType: KotlinType?, source: SourceElement,
+                                                isNoinline: Boolean, isEnf: Boolean, varargElementType: KotlinType?, source: SourceElement,
                                                 destructuringVariables: (() -> List<VariableDescriptor>)?
         ): ValueParameterDescriptorImpl =
                 if (destructuringVariables == null)
                     ValueParameterDescriptorImpl(containingDeclaration, original, index, annotations, name, outType,
-                                                 declaresDefaultValue, isCrossinline, isNoinline, varargElementType, source)
+                                                 declaresDefaultValue, isCrossinline, isNoinline, isEnf, varargElementType, source)
                 else
                     WithDestructuringDeclaration(containingDeclaration, original, index, annotations, name, outType,
-                                                 declaresDefaultValue, isCrossinline, isNoinline, varargElementType, source,
+                                                 declaresDefaultValue, isCrossinline, isNoinline, isEnf, varargElementType, source,
                                                  destructuringVariables)
     }
 
@@ -71,12 +72,12 @@ open class ValueParameterDescriptorImpl(
             outType: KotlinType,
             declaresDefaultValue: Boolean,
             isCrossinline: Boolean,
-            isNoinline: Boolean, varargElementType: KotlinType?,
+            isNoinline: Boolean, isEnf: Boolean, varargElementType: KotlinType?,
             source: SourceElement,
             destructuringVariables: () -> List<VariableDescriptor>
     ) : ValueParameterDescriptorImpl(
             containingDeclaration, original, index, annotations, name, outType, declaresDefaultValue,
-            isCrossinline, isNoinline,
+            isCrossinline, isNoinline, isEnf,
             varargElementType, source) {
         // It's forced to be lazy because its resolution depends on receiver of relevant lambda, that is being created at the same moment
         // as value parameters.
@@ -86,7 +87,7 @@ open class ValueParameterDescriptorImpl(
         override fun copy(newOwner: CallableDescriptor, newName: Name, newIndex: Int): ValueParameterDescriptor {
             return WithDestructuringDeclaration(
                 newOwner, null, newIndex, annotations, newName, type, declaresDefaultValue(),
-                isCrossinline, isNoinline, varargElementType, SourceElement.NO_SOURCE
+                isCrossinline, isNoinline, isEnf, varargElementType, SourceElement.NO_SOURCE
             ) { destructuringVariables }
         }
     }
@@ -119,7 +120,7 @@ open class ValueParameterDescriptorImpl(
     override fun copy(newOwner: CallableDescriptor, newName: Name, newIndex: Int): ValueParameterDescriptor {
         return ValueParameterDescriptorImpl(
                 newOwner, null, newIndex, annotations, newName, type, declaresDefaultValue(),
-                isCrossinline, isNoinline, varargElementType, SourceElement.NO_SOURCE
+                isCrossinline, isNoinline, isEnf, varargElementType, SourceElement.NO_SOURCE
         )
     }
 

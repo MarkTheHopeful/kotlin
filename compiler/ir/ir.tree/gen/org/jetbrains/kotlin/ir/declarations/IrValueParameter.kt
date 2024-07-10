@@ -36,6 +36,8 @@ abstract class IrValueParameter : IrDeclarationBase(), IrValueDeclaration {
 
     abstract var isNoinline: Boolean
 
+    abstract var isEnf: Boolean
+
     /**
      * If `true`, the value parameter does not participate in [IdSignature] computation.
      *

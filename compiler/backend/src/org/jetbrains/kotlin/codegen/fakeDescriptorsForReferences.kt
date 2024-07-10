@@ -87,7 +87,7 @@ private fun TypeApproximator.approximate(descriptor: CallableMemberDescriptor, b
             ValueParameterDescriptorImpl(
                 it.containingDeclaration, it.original, it.index, it.annotations,
                 it.name, outType = approximatedType, it.declaresDefaultValue(),
-                it.isCrossinline, it.isNoinline, it.varargElementType, it.source
+                it.isCrossinline, it.isNoinline, it.isEnf, it.varargElementType, it.source
             )
         } else {
             it

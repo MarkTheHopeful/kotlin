@@ -401,6 +401,7 @@ abstract class AbstractIrFactoryImpl : IrFactory {
         varargElementType: IrType?,
         isCrossinline: Boolean,
         isNoinline: Boolean,
+        isEnf: Boolean,
         isHidden: Boolean,
     ): IrValueParameter =
         IrValueParameterImpl(
@@ -414,6 +415,7 @@ abstract class AbstractIrFactoryImpl : IrFactory {
             varargElementType = varargElementType,
             isCrossinline = isCrossinline,
             isNoinline = isNoinline,
+            isEnf = isEnf,
             isHidden = isHidden,
             isAssignable = isAssignable,
             factory = this

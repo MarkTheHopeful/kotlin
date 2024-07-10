@@ -37,6 +37,7 @@ fun createValueParametersForInvokeInFunctionType(
             /* declaresDefaultValue = */ false,
             /* isCrossinline = */ false,
             /* isNoinline = */ false,
+            /* isEnf = */ false,
             null, SourceElement.NO_SOURCE
         )
     }

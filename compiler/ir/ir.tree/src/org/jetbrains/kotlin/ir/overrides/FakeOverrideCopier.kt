@@ -90,6 +90,7 @@ internal class FakeOverrideCopier(
             varargElementType = declaration.varargElementType?.let(typeRemapper::remapType),
             isCrossinline = declaration.isCrossinline,
             isNoinline = declaration.isNoinline,
+            isEnf = declaration.isEnf,
             isHidden = declaration.isHidden,
         ).apply {
             valueParameters[declaration.symbol] = symbol

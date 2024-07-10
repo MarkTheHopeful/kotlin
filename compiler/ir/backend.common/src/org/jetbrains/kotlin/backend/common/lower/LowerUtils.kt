@@ -244,6 +244,7 @@ fun ParameterDescriptor.copyAsValueParameter(newOwner: CallableDescriptor, index
         declaresDefaultValue = false,
         isCrossinline = false,
         isNoinline = false,
+        isEnf = false,
         varargElementType = null,
         source = source
     )

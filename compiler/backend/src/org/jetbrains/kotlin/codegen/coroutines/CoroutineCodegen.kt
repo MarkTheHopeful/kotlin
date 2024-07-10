@@ -78,7 +78,7 @@ abstract class AbstractCoroutineCodegen(
                     ValueParameterDescriptorImpl(
                         this, null, 0, Annotations.EMPTY, Name.identifier(SUSPEND_CALL_RESULT_NAME),
                         classDescriptor.module.getResult(classDescriptor.builtIns.anyType),
-                        declaresDefaultValue = false, isCrossinline = false, isNoinline = false, varargElementType = null,
+                        declaresDefaultValue = false, isCrossinline = false, isNoinline = false, isEnf = false, varargElementType = null,
                         SourceElement.NO_SOURCE
                     )
                 ),

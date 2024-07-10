@@ -32,6 +32,7 @@ class IrLazyValueParameter(
     varargElementKotlinType: KotlinType?,
     override var isCrossinline: Boolean,
     override var isNoinline: Boolean,
+    override var isEnf: Boolean,
     override var isHidden: Boolean,
     override val isAssignable: Boolean,
     override val stubGenerator: DeclarationStubGenerator,

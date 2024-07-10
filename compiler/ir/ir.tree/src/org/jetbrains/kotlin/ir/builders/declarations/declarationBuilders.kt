@@ -314,6 +314,7 @@ fun <D> buildReceiverParameter(
         varargElementType = null,
         isCrossinline = false,
         isNoinline = false,
+        isEnf = false,
         isHidden = false,
     ).also {
         it.parent = parent
@@ -333,6 +334,7 @@ fun IrFactory.buildValueParameter(builder: IrValueParameterBuilder, parent: IrDe
             varargElementType = varargElementType,
             isCrossinline = isCrossInline,
             isNoinline = isNoinline,
+            isEnf = isEnf,
             isHidden = isHidden
         ).also {
             it.parent = parent

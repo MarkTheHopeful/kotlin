@@ -134,7 +134,7 @@ internal class PropertyGenerator(declarationGenerator: DeclarationGenerator) : D
                         ).apply {
                             val setterValueParameter = ValueParameterDescriptorImpl(
                                 this, null, 0, Annotations.EMPTY, DEFAULT_VALUE_PARAMETER, propertyDescriptor.type,
-                                declaresDefaultValue = false, isCrossinline = false, isNoinline = false,
+                                declaresDefaultValue = false, isCrossinline = false, isNoinline = false, isEnf = false,
                                 varargElementType = null, source = SourceElement.NO_SOURCE
                             )
                             initialize(setterValueParameter)

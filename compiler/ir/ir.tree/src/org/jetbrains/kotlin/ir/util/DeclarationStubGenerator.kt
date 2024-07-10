@@ -231,7 +231,7 @@ abstract class DeclarationStubGenerator(
         IrLazyValueParameter(
             UNDEFINED_OFFSET, UNDEFINED_OFFSET, computeOrigin(this), IrValueParameterSymbolImpl(this), this, name, index,
             type, varargElementType,
-            isCrossinline = isCrossinline, isNoinline = isNoinline, isHidden = false, isAssignable = false,
+            isCrossinline = isCrossinline, isNoinline = isNoinline, isEnf = isEnf, isHidden = false, isAssignable = false,
             stubGenerator = this@DeclarationStubGenerator, typeTranslator = typeTranslator
         ).also { irValueParameter ->
             if (descriptor.declaresDefaultValue()) {

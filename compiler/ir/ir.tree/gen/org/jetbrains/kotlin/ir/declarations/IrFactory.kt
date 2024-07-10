@@ -207,6 +207,7 @@ interface IrFactory {
         varargElementType: IrType?,
         isCrossinline: Boolean,
         isNoinline: Boolean,
+        isEnf: Boolean,
         isHidden: Boolean,
     ): IrValueParameter
 

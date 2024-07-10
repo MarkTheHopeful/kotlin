@@ -28,6 +28,9 @@ val ParameterDescriptor.isCrossinline: Boolean
 val ParameterDescriptor.isNoinline: Boolean
     get() = this is ValueParameterDescriptor && isNoinline
 
+val ParameterDescriptor.isEnf: Boolean
+    get() = this is ValueParameterDescriptor && isEnf
+
 fun IrFactory.createIrClassFromDescriptor(
         startOffset: Int,
         endOffset: Int,

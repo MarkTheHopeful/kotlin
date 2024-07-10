@@ -48,6 +48,7 @@ fun copyValueParameters(
             oldParameter.declaresDefaultValue(),
             oldParameter.isCrossinline,
             oldParameter.isNoinline,
+            oldParameter.isEnf,
             if (oldParameter.varargElementType != null) newOwner.module.builtIns.getArrayElementType(newParameterType) else null,
             oldParameter.source
         )

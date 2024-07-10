@@ -86,6 +86,7 @@ private fun initializeSamConstructorDescriptor(
         declaresDefaultValue = false,
         isCrossinline = false,
         isNoinline = false,
+        isEnf = false,
         varargElementType = null,
         source = SourceElement.NO_SOURCE
     )

@@ -152,6 +152,7 @@ value class ValueParameterFlags(val flags: Long) {
 
     val isCrossInline: Boolean get() = IrFlags.IS_CROSSINLINE.get(flags.toInt())
     val isNoInline: Boolean get() = IrFlags.IS_NOINLINE.get(flags.toInt())
+    val isEnf: Boolean get() = IrFlags.IS_ENF.get(flags.toInt())
     val isHidden: Boolean get() = IrFlags.IS_HIDDEN.get(flags.toInt())
     val isAssignable: Boolean get() = IrFlags.IS_ASSIGNABLE.get(flags.toInt())
 
@@ -163,6 +164,7 @@ value class ValueParameterFlags(val flags: Long) {
                     defaultValue != null,
                     isCrossinline,
                     isNoinline,
+                    isEnf,
                     isHidden,
                     isAssignable
                 ).toLong()

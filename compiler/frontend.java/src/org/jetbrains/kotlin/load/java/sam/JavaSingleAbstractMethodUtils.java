@@ -173,6 +173,7 @@ public class JavaSingleAbstractMethodUtils {
                     /* declaresDefaultValue = */ false,
                     /* isCrossinline = */ false,
                     /* isNoinline = */ false,
+                    /* isEnf = */ false,
                     varargElementType, SourceElement.NO_SOURCE
             );
             valueParameters.add(newParam);

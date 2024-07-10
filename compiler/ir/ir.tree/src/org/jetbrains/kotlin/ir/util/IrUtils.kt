@@ -936,6 +936,7 @@ fun IrValueParameter.copyTo(
         varargElementType = varargElementType,
         isCrossinline = isCrossinline,
         isNoinline = isNoinline,
+        isEnf = isEnf,
         isHidden = false,
     ).also {
         it.parent = irFunction
@@ -969,6 +970,7 @@ fun IrFunction.copyReceiverParametersFrom(from: IrFunction, substitutionMap: Map
             varargElementType = varargElementType?.substitute(substitutionMap),
             isCrossinline = isCrossinline,
             isNoinline = isNoinline,
+            isEnf = isEnf,
             isHidden = isHidden,
         ).also { parameter ->
             parameter.parent = this@copyReceiverParametersFrom
@@ -1253,6 +1255,7 @@ fun IrFunction.createDispatchReceiverParameter(origin: IrDeclarationOrigin? = nu
         varargElementType = null,
         isCrossinline = false,
         isNoinline = false,
+        isEnf = false,
         isHidden = false,
     ).apply {
         parent = this@createDispatchReceiverParameter

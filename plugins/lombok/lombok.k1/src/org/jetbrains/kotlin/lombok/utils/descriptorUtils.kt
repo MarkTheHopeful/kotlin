@@ -88,6 +88,7 @@ private fun CallableDescriptor.makeValueParameter(param: LombokValueParameter, i
         declaresDefaultValue = false,
         isCrossinline = false,
         isNoinline = false,
+        isEnf = false,
         varargElementType = null,
         source = this.source
     )

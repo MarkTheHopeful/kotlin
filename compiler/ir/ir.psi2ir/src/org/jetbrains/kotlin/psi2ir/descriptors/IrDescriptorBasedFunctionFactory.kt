@@ -296,6 +296,7 @@ class IrDescriptorBasedFunctionFactory(
             varargElementType = null,
             isCrossinline = false,
             isNoinline = false,
+            isEnf = false,
             isHidden = false,
         )
     }
@@ -353,6 +354,7 @@ class IrDescriptorBasedFunctionFactory(
                     varargElementType = null,
                     isCrossinline = false,
                     isNoinline = false,
+                    isEnf = false,
                     isHidden = false,
                 )
                 vDeclaration.parent = fDeclaration
@@ -394,6 +396,7 @@ class IrDescriptorBasedFunctionFactory(
             varargElementType = (this as? ValueParameterDescriptor)?.varargElementType?.let(::toIrType),
             isCrossinline = isCrossinline,
             isNoinline = isNoinline,
+            isEnf = isEnf,
             isHidden = false
         ).also {
             it.parent = this@createValueParameter

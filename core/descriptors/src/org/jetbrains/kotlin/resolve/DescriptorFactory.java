@@ -164,6 +164,7 @@ public class DescriptorFactory {
                 /* declaresDefaultValue = */ false,
                 /* isCrossinline = */ false,
                 /* isNoinline = */ false,
+                /* isEnf = */ false,
                 null,
                 enumClass.getSource()
         );

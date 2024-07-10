@@ -362,6 +362,7 @@ class DataClassMembersGenerator(private val c: Fir2IrComponents) : Fir2IrCompone
                 varargElementType = null,
                 isCrossinline = false,
                 isNoinline = false,
+                isEnf = false,
                 isHidden = false
             ).apply {
                 parent = irFunction

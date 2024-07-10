@@ -66,7 +66,7 @@ class SerialInfoCodegenImpl(val codegen: ImplementationBodyCodegen, val thisClas
         val args = mutableListOf<ValueParameterDescriptor>()
         var i = 0
         props.forEach { prop ->
-            args.add(ValueParameterDescriptorImpl(constr, null, i++, Annotations.EMPTY, prop.name, prop.type, false, false, false, null, constr.source))
+            args.add(ValueParameterDescriptorImpl(constr, null, i++, Annotations.EMPTY, prop.name, prop.type, false, false, false, false, null, constr.source))
         }
         constr.initialize(
                 args,

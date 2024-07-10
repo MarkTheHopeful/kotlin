@@ -365,6 +365,7 @@ class Fir2IrConverter(
                         varargElementType = null,
                         isCrossinline = false,
                         isNoinline = false,
+                        isEnf = false,
                         isHidden = false
                     ).apply {
                         parent = this@fragmentFunction
