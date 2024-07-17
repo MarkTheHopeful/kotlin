@@ -243,6 +243,11 @@ private class FirCallArgumentsProcessor(
             return
         }
 
+        // Do we consider external lambdas as positional arguments?
+        if (!lastParameter.isVararg && lastParameter.isENF) {
+            addDiagnostic(PositionalUsageWithENF(externalArgument, lastParameter))
+        }
+
         if (function.origin != FirDeclarationOrigin.DynamicScope) {
             if (lastParameter.isVararg) {
                 addDiagnostic(VarargArgumentOutsideParentheses(externalArgument, lastParameter))
